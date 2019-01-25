@@ -11,6 +11,7 @@ declare global {
     [key: string]: (<K extends keyof ServiceWorkerGlobalScopeEventMap>(this: ServiceWorkerGlobalScope, ev: K) => any);
   }
 
+  // Overriding the original ServiceWorkerGlobalScope to add mock features.
   interface ServiceWorkerGlobalScope {
     listeners: ServiceWorkerListener;
 

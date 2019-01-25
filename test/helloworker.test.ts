@@ -15,14 +15,20 @@ describe('helloworker', () => {
     expect(self.listeners.fetch).toBeDefined();
   });
 
-  it('should return Hello World!', async () => {
+  it('should return Hello US!', async () => {
     fetchMock.mockResponseOnce('Hello');
 
     const request = new Request('/path');
+    request.cf = {
+      tlsVersion: "1.3",
+      tlsCipher: "AES GCM",
+      country: "US",
+      colo: "SFO",
+    };
     const response = await self.trigger('fetch', request);
 
     expect(fetchMock).toBeCalledTimes(1);
     expect(response.status).toBe(200);
-    expect(await response.text()).toBe('Hello World!');
+    expect(await response.text()).toBe('Hello US!');
   });
 });

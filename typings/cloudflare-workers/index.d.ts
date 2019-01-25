@@ -145,6 +145,30 @@ interface CloudFlareRequestFeatures {
 }
 
 interface CloudFlareRequestInit extends RequestInit {
+  /**
+   * Controlling Cloudflare Features
+   * You can use a Worker to control how other Cloudflare features affect the
+   * request. Your Worker runs after security features, but before everything
+   * else. Therefore, a Worker cannot affect the operation of security features
+   * (since they already finished), but it can affect other features, like
+   * Polish or ScrapeShield, or how Cloudflare caches the response.
+   *
+   * Cloudflare features are controlled through the cf property of a request.
+   * Setting cf is kind of like setting headers. You can add cf to a request
+   * object by making a copy:
+   *
+   * // Disable ScrapeShield for this request.
+   * let request = new Request(event.request, { cf: { scrapeShield: false } })
+   *
+   * Alternatively, you can set cf directly on fetch():
+   * // Disable ScrapeShield for this request.
+   * fetch(event.request, { cf: { scrapeShield: false } })
+   *
+   * Note: Invalid or incorrectly-named settings in the cf object will be
+   * silently ignored. Be careful to test that you are getting the behavior you
+   * want. Currently, settings in the cf object cannot be tested in the live
+   * preview.
+   */
   cf: CloudFlareRequestFeatures;
 }
 
