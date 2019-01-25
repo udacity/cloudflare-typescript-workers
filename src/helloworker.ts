@@ -1,4 +1,3 @@
-/// <reference types="../node_modules/types-serviceworker" />
 /*
  * types-serviceworker src:
  * https://github.com/Microsoft/TypeScript/issues/11781#issuecomment-449617791

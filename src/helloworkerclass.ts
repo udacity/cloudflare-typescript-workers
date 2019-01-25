@@ -4,8 +4,17 @@ export class HelloWorkerClass {
     status: 200,
   };
 
+  private cfDefaults: CloudFlareRequestInit = {
+    cf: {
+      cacheKey: "hello-world",
+      minify: {
+        html: true,
+      },
+    }
+  }
+
   public async handle(request: Request) {
-    const response = await fetch(request);
+    const response = await fetch(request, this.cfDefaults);
     let body = 'Hello';
 
     if (response.status === 200) {

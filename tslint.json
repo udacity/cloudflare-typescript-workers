@@ -5,7 +5,8 @@
     ],
     "jsRules": {},
     "rules": {
-        "quotemark": [true, "single"]
+        "quotemark": [true, "single"],
+        "interface-name": false,
     },
     "rulesDirectory": [
         "node_modules/tslint-eslint-rules/dist/rules"

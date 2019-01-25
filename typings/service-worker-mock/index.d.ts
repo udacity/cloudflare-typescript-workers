@@ -1,10 +1,10 @@
 /// <reference types="../../node_modules/types-serviceworker" />
 
 declare module 'service-worker-mock' {
-  interface IEnvOptions {
+  interface EnvOptions {
     [key: string]: string;
   }
 
-  function makeServiceWorkerEnv(envOptions?: IEnvOptions): ServiceWorkerGlobalScope;
+  function makeServiceWorkerEnv(envOptions?: EnvOptions): ServiceWorkerGlobalScope;
   export default makeServiceWorkerEnv;
 }

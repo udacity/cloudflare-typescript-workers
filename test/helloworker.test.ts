@@ -1,5 +1,3 @@
-import '../typings/service-worker-mock/global';
-
 import makeServiceWorkerEnv from 'service-worker-mock';
 
 describe('helloworker', () => {

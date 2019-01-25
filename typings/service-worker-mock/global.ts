@@ -1,5 +1,4 @@
 /// <reference types="../../node_modules/types-serviceworker" />
-/// <reference types="./index" />
 // Why is this a global augmentation?
 //
 // Because service-worker-mock uses the ServiceWorkerGlobalScope class name
@@ -8,12 +7,10 @@
 
 export { };
 declare global {
-  // tslint disabled for patching.
-  /* tslint:disable-next-line:interface-name */
   interface ServiceWorkerListener {
     [key: string]: (<K extends keyof ServiceWorkerGlobalScopeEventMap>(this: ServiceWorkerGlobalScope, ev: K) => any);
   }
-  /* tslint:disable-next-line:interface-name */
+
   interface ServiceWorkerGlobalScope {
     listeners: ServiceWorkerListener;
 
