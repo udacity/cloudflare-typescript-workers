@@ -7,11 +7,17 @@
 
 export { };
 declare global {
-  type ServiceWorkerGlobalScopeEvents = (<K extends keyof ServiceWorkerGlobalScopeEventMap>(this: ServiceWorkerGlobalScope, ev: K) => any);
+  type ServiceWorkerGlobalScopeEventListener = <K extends keyof ServiceWorkerGlobalScopeEventMap>(
+    this: ServiceWorkerGlobalScope, ev: K) => any;
 
   interface ServiceWorkerListener {
-    [key: string]: ServiceWorkerGlobalScopeEvents;
-    get(key: string): ServiceWorkerGlobalScopeEvents;
+    [key: string]: ServiceWorkerGlobalScopeEventListener;
+    /**
+     * Gets a listener object.
+     *
+     * @param key string of the name of a listener
+     */
+    get(key: string): ServiceWorkerGlobalScopeEventListener;
   }
 
   // Overriding the original ServiceWorkerGlobalScope to add mock features.

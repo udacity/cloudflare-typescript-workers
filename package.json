@@ -1,8 +1,8 @@
 {
-  "name": "cloudflare-tested-typescript-worker",
+  "name": "cloudflare-typescript-workers",
   "version": "1.0.0",
-  "description": "A Hello World Cloudflare Worker in TypeScript with Tests",
-  "main": "index.js",
+  "description": "A tested Hello World Cloudflare Worker written in TypeScript",
+  "main": "src/helloworker.ts",
   "scripts": {
     "build": "webpack --progress --mode production # Create minified output, runs in Cloudflare",
     "build-dev": "webpack --progress --mode none # Creates readable output, runs in Cloudflare",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/udacity/cloudflare-tested-typescript-worker.git"
+    "url": "git+https://github.com/udacity/cloudflare-typescript-workers.git"
   },
   "author": "Brad Erickson <bderickson@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/udacity/cloudflare-tested-typescript-worker/issues"
+    "url": "https://github.com/udacity/cloudflare-typescript-workers/issues"
   },
-  "homepage": "https://github.com/udacity/cloudflare-tested-typescript-worker#readme",
+  "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme",
   "devDependencies": {
     "@types/jest": "^24.0.6",
     "@types/node": "^11.9.4",

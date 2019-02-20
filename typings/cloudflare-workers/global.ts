@@ -1,3 +1,5 @@
+import { CloudFlareDefaultCacheStorage } from '.';
+
 // Why is this a global augmentation?
 //
 // Because Cloudflare extends the Request object with additional attributes.
@@ -45,6 +47,26 @@ declare global {
        * The three letter airport code of the colo the request hit.
        */
       colo: string;
-    }
+    };
+  }
+
+  /**
+   * CloudFlare Cache Storage
+   *
+   * The Cache API gives you fine grained control of reading and writing from
+   * cache, and deciding exactly when to fetch data from your origin.
+   *
+   * ref: https://developers.cloudflare.com/workers/reference/cache-api/
+   *
+   * This global augmentation adds the Cloudflare Cache storage object to the
+   * regular CacheStorage interface.
+   */
+  interface CacheStorage {
+    /**
+     * The Cloudflare Workers runtime exposes a single global Cache object,
+     * caches.default. This differs from web browsers’ Cache API in that they do
+     * not expose any default cache object.
+     */
+    default: CloudFlareDefaultCacheStorage;
   }
 }

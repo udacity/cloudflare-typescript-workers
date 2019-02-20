@@ -1,6 +1,34 @@
+export interface CloudFlareCacheQueryOptions {
+  /**
+   * Consider the request method to be GET, regardless of its actual value.
+   */
+  ignoreMethod: boolean;
+}
+
+/**
+ * A Cache object exposes three methods. Each method accepts a Request object or
+ * string value as its first parameter. If a string is passed, it will be
+ * interpreted as the URL for a new Request object.
+ */
+export interface CloudFlareDefaultCacheStorage {
+  put(request: Request | string, response: Response): Promise<undefined>;
+  match(request: Request | string, options?: CloudFlareCacheQueryOptions): Promise<Response | undefined>;
+  delete(request: Request | string, options?: CloudFlareCacheQueryOptions): Promise<boolean>;
+}
+
+export interface CloudflareCacheStorage {
+  default: CloudFlareDefaultCacheStorage;
+}
+
+// Does not extend ServiceWorkerGlobalScope because we are entirely replacing to
+// match the Cloudflare implementation.
+export interface CloudflareWorkerGlobalScope {
+  caches: CloudflareCacheStorage;
+}
+
 // An interface for controlling Cloudflare Features on Requests. Reference:
 // https://developers.cloudflare.com/workers/reference/cloudflare-features/
-interface CloudFlareRequestFeatures {
+export interface CloudFlareRequestFeatures {
   /**
    * Sets Polish mode. The possible values are "lossy", "lossless", or "off".
    */
@@ -144,7 +172,7 @@ interface CloudFlareRequestFeatures {
   cacheTtlByStatus?: { [key: string]: number };
 }
 
-interface CloudFlareRequestInit extends RequestInit {
+export interface CloudFlareRequestInit extends RequestInit {
   /**
    * Controlling Cloudflare Features
    * You can use a Worker to control how other Cloudflare features affect the
