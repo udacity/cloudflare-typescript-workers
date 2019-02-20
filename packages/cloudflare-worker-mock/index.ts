@@ -1,18 +1,16 @@
-/// <reference types="../../node_modules/types-serviceworker" />
-
 // Primarily exists to implement the Cache API:
 // https://developers.cloudflare.com/workers/reference/cache-api/
 
 import makeServiceWorkerEnv from 'service-worker-mock';
 import { EnvOptions } from 'service-worker-mock';
-import { CloudFlareCacheQueryOptions, CloudflareWorkerGlobalScope } from '../../typings/cloudflare-workers';
+import { CloudFlareCacheQueryOptions, CloudflareWorkerGlobalScopePatch } from '../../typings/cloudflare-workers';
 
 /**
  * Create a mock environment for a Cloudflare Worker with a mockable cache layer.
  */
-export function makeCloudflareWorkerEnv(envOptions?: EnvOptions): CloudflareWorkerGlobalScope {
+export function makeCloudflareWorkerEnv(envOptions?: EnvOptions): CloudflareWorkerGlobalScopePatch {
   const serviceWorkerEnv = makeServiceWorkerEnv(envOptions);
-  const cloudflareWorkerEnv = serviceWorkerEnv as CloudflareWorkerGlobalScope;
+  const cloudflareWorkerEnv = serviceWorkerEnv as CloudflareWorkerGlobalScopePatch;
 
   cloudflareWorkerEnv.caches = {
     default: {

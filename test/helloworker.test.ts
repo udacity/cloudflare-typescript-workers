@@ -1,9 +1,38 @@
+/*
+ * There are two options for using ServiceWorker types, both with hassles. We
+ * are using the webworker library method instead of the types-serviceworker
+ * package.
+ *
+ * Option 1: WebWorker library included with TypeScript
+ * tsc --lib es5,webworker # or anything es5+
+ *
+ * But it requires:
+ *   export default null;
+ *   declare var self: ServiceWorkerGlobalScope;
+ *
+ * ref:
+ * https://github.com/Microsoft/TypeScript/issues/14877#issuecomment-340279293
+ *
+ * Option 2: types-serviceworker package
+ *
+ * src:
+ * https://github.com/Microsoft/TypeScript/issues/11781#issuecomment-449617791
+ *
+ * types-serviceworker could be referenced in tsconfig.json, but that may lead
+ * to confusion because: "If types is specified, only packages listed will be
+ * included."
+ * ref:
+ * https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+ */
+import CloudflareWorkerGlobalScope from '../typings/cloudflare-workers';
+declare var self: CloudflareWorkerGlobalScope;
+
 import makeCloudflareWorkerEnv from '../packages/cloudflare-worker-mock';
 
 describe('helloworker', () => {
 
   beforeEach(() => {
-    // Merge the Service Worker Environment in to the global scope.
+    // Merge the Cloudflare Worker Environment into the global scope.
     Object.assign(global, makeCloudflareWorkerEnv());
     // Clear all module imports.
     jest.resetModules();

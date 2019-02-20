@@ -1,3 +1,10 @@
+/**
+ * A type of the ServiceWorkerGlobalScope which will include
+ * CloudflareWorkerGlobalScopePatch when created with makeCloudflareWorkerEnv().
+ */
+export type CloudflareWorkerGlobalScope = ServiceWorkerGlobalScope;
+export default CloudflareWorkerGlobalScope;
+
 export interface CloudFlareCacheQueryOptions {
   /**
    * Consider the request method to be GET, regardless of its actual value.
@@ -22,7 +29,7 @@ export interface CloudflareCacheStorage {
 
 // Does not extend ServiceWorkerGlobalScope because we are entirely replacing to
 // match the Cloudflare implementation.
-export interface CloudflareWorkerGlobalScope {
+export interface CloudflareWorkerGlobalScopePatch {
   caches: CloudflareCacheStorage;
 }
 

@@ -1,4 +1,3 @@
-/// <reference types="../../node_modules/types-serviceworker" />
 // Why is this a global augmentation?
 //
 // Because service-worker-mock uses the ServiceWorkerGlobalScope class name

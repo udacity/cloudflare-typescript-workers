@@ -1,4 +1,4 @@
-import { CloudFlareDefaultCacheStorage } from '.';
+import { CloudFlareDefaultCacheStorage } from './index';
 
 // Why is this a global augmentation?
 //
