@@ -18,7 +18,7 @@
 
 import { HelloWorkerClass } from './helloworkerclass';
 
-addEventListener('fetch', (event: Event) => {
+self.addEventListener('fetch', (event: Event) => {
   const worker = new HelloWorkerClass();
   (event as FetchEvent).respondWith(worker.handle((event as FetchEvent).request));
 });

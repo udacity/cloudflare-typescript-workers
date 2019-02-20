@@ -12,7 +12,7 @@ describe('helloworker', () => {
   });
 
   it('should add listeners', async () => {
-    expect(self.listeners.fetch).toBeDefined();
+    expect(self.listeners.get('fetch')).toBeDefined();
   });
 
   it('should return Hello US!', async () => {
@@ -28,7 +28,7 @@ describe('helloworker', () => {
     const response = await self.trigger('fetch', request);
 
     expect(fetchMock).toBeCalledTimes(1);
-    expect(response.status).toBe(200);
-    expect(await response.text()).toBe('Hello US!');
+    expect(response[0].status).toBe(200);
+    expect(await response[0].text()).toBe('Hello US!');
   });
 });

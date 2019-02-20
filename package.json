@@ -21,19 +21,19 @@
   },
   "homepage": "https://github.com/udacity/cloudflare-tested-typescript-worker#readme",
   "devDependencies": {
-    "@types/jest": "^23.3.12",
-    "@types/node": "^10.12.18",
-    "jest": "^23.6.0",
-    "jest-fetch-mock": "^2.1.0",
-    "service-worker-mock": "^1.12.0",
-    "ts-jest": "^23.10.5",
+    "@types/jest": "^24.0.6",
+    "@types/node": "^11.9.4",
+    "jest": "^24.1.0",
+    "jest-fetch-mock": "^2.1.1",
+    "service-worker-mock": "^2.0.0",
+    "ts-jest": "^24.0.0",
     "ts-loader": "^5.3.3",
     "tslint": "^5.12.1",
     "tslint-eslint-rules": "^5.4.0",
     "types-serviceworker": "0.0.1",
-    "typescript": "^3.2.2",
-    "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1"
+    "typescript": "^3.3.3",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   },
   "dependencies": {}
 }

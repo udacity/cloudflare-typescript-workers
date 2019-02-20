@@ -7,15 +7,18 @@
 
 export { };
 declare global {
+  type ServiceWorkerGlobalScopeEvents = (<K extends keyof ServiceWorkerGlobalScopeEventMap>(this: ServiceWorkerGlobalScope, ev: K) => any);
+
   interface ServiceWorkerListener {
-    [key: string]: (<K extends keyof ServiceWorkerGlobalScopeEventMap>(this: ServiceWorkerGlobalScope, ev: K) => any);
+    [key: string]: ServiceWorkerGlobalScopeEvents;
+    get(key: string): ServiceWorkerGlobalScopeEvents;
   }
 
   // Overriding the original ServiceWorkerGlobalScope to add mock features.
   interface ServiceWorkerGlobalScope {
     listeners: ServiceWorkerListener;
 
-    trigger(name: string, args: Request): Promise<Response>;
+    trigger(name: string, args: Request): Promise<Response[]>;
     // Final overload for void.
     trigger(name: string, args: any): Promise<void>;
   }
