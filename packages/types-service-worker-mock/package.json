@@ -1,0 +1,25 @@
+{
+  "name": "types-service-worker-mock",
+  "version": "1.0.0",
+  "description": "TypeScript types for service-worker-mock",
+  "main": "global.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/udacity/cloudflare-typescript-workers.git"
+  },
+  "keywords": [
+    "service",
+    "workers",
+    "typescript"
+  ],
+  "author": "Brad Erickson <bderickson@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/udacity/cloudflare-typescript-workers/issues"
+  },
+  "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme",
+  "types": "index.d.ts"
+}
