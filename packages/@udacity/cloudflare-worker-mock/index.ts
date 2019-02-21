@@ -1,9 +1,9 @@
 // Primarily exists to implement the Cache API:
 // https://developers.cloudflare.com/workers/reference/cache-api/
 
+import { CloudFlareCacheQueryOptions, CloudflareWorkerGlobalScopePatch } from '@udacity/types-cloudflare-worker';
 import makeServiceWorkerEnv from 'service-worker-mock';
 import { EnvOptions } from 'service-worker-mock';
-import { CloudFlareCacheQueryOptions, CloudflareWorkerGlobalScopePatch } from 'types-cloudflare-worker';
 
 /**
  * Create a mock environment for a Cloudflare Worker with a mockable cache layer.

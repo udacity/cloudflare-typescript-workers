@@ -1,4 +1,4 @@
-import { CloudFlareRequestInit } from 'types-cloudflare-worker';
+import { CloudFlareRequestInit } from '@udacity/types-cloudflare-worker';
 
 export class HelloWorkerClass {
   private responseInit = {

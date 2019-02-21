@@ -24,10 +24,10 @@
  * ref:
  * https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
  */
-import { CloudflareWorkerGlobalScope } from 'types-cloudflare-worker';
+import { CloudflareWorkerGlobalScope } from '@udacity/types-cloudflare-worker';
 declare var self: CloudflareWorkerGlobalScope;
 
-import makeCloudflareWorkerEnv from 'cloudflare-worker-mock';
+import makeCloudflareWorkerEnv from '@udacity/cloudflare-worker-mock';
 
 describe('helloworker', () => {
 

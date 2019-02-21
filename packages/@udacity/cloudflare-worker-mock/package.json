@@ -18,13 +18,14 @@
     "testing"
   ],
   "author": "Brad Erickson <bderickson@gmail.com>",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/udacity/cloudflare-typescript-workers/issues"
   },
   "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme",
   "types": "index.d.ts",
   "devDependencies": {
+    "@udacity/types-cloudflare-worker": "^1.0.0-rc1",
     "service-worker-mock": "^2.0.0"
   }
 }
