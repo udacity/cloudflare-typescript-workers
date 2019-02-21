@@ -23,6 +23,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.6",
     "@types/node": "^11.9.4",
+    "cloudflare-worker-mock": "file:./packages/cloudflare-worker-mock",
     "jest": "^24.1.0",
     "jest-fetch-mock": "^2.1.1",
     "service-worker-mock": "^2.0.0",
@@ -30,6 +31,7 @@
     "ts-loader": "^5.3.3",
     "tslint": "^5.12.1",
     "tslint-eslint-rules": "^5.4.0",
+    "types-cloudflare-worker": "file:./packages/types-cloudflare-worker",
     "types-service-worker-mock": "file:./packages/types-service-worker-mock",
     "typescript": "^3.3.3",
     "webpack": "^4.29.5",

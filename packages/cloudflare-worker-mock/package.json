@@ -1,8 +1,8 @@
 {
-  "name": "@udacity/types-service-worker-mock",
+  "name": "@udacity/cloudflare-worker-mock",
   "version": "1.0.0",
-  "description": "TypeScript types for service-worker-mock",
-  "main": "global.ts",
+  "description": "Mocks for the Cloudflare Worker API",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,10 +11,11 @@
     "url": "git+https://github.com/udacity/cloudflare-typescript-workers.git"
   },
   "keywords": [
-    "service",
+    "cloudflare",
     "workers",
     "typescript",
-    "types"
+    "mock",
+    "testing"
   ],
   "author": "Brad Erickson <bderickson@gmail.com>",
   "license": "Apache 2.0",

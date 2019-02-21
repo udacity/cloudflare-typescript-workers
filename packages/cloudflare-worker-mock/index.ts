@@ -3,7 +3,7 @@
 
 import makeServiceWorkerEnv from 'service-worker-mock';
 import { EnvOptions } from 'service-worker-mock';
-import { CloudFlareCacheQueryOptions, CloudflareWorkerGlobalScopePatch } from '../../typings/cloudflare-workers';
+import { CloudFlareCacheQueryOptions, CloudflareWorkerGlobalScopePatch } from 'types-cloudflare-worker';
 
 /**
  * Create a mock environment for a Cloudflare Worker with a mockable cache layer.

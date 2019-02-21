@@ -1,4 +1,4 @@
-import { CloudFlareRequestInit } from '../typings/cloudflare-workers';
+import { CloudFlareRequestInit } from 'types-cloudflare-worker';
 
 export class HelloWorkerClass {
   private responseInit = {
