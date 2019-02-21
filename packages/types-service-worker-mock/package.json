@@ -1,6 +1,6 @@
 {
   "name": "@udacity/types-service-worker-mock",
-  "version": "1.0.0",
+  "version": "1.0.0-rc1",
   "description": "TypeScript types for service-worker-mock",
   "main": "global.ts",
   "scripts": {
@@ -22,5 +22,8 @@
     "url": "https://github.com/udacity/cloudflare-typescript-workers/issues"
   },
   "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme",
-  "types": "index.d.ts"
+  "types": "index.d.ts",
+  "devDependencies": {
+    "service-worker-mock": "^2.0.0"
+  }
 }
