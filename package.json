@@ -7,7 +7,7 @@
     "build": "webpack --progress --mode production # Create minified output, runs in Cloudflare",
     "build-dev": "webpack --progress --mode none # Creates readable output, runs in Cloudflare",
     "test": "jest",
-    "lint": "tslint --project tsconfig.json",
+    "lint": "tslint --project tsconfig.json packages/*/*.ts packages/*/*.d.ts typings/*/*.ts typings/*.d.ts src/*.ts test/*.ts",
     "lint-fix": "tslint --project tsconfig.json --fix"
   },
   "repository": {
@@ -30,10 +30,10 @@
     "ts-loader": "^5.3.3",
     "tslint": "^5.12.1",
     "tslint-eslint-rules": "^5.4.0",
+    "types-service-worker-mock": "file:./packages/types-service-worker-mock",
     "typescript": "^3.3.3",
     "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3",
-    "types-service-worker-mock": "file:./packages/types-service-worker-mock"
+    "webpack-cli": "^3.2.3"
   },
   "dependencies": {}
 }

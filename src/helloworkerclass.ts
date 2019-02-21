@@ -37,3 +37,4 @@ export class HelloWorkerClass {
     return response;
   }
 }
+export default HelloWorkerClass;

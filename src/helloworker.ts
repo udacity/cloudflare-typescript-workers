@@ -1,4 +1,4 @@
-import { HelloWorkerClass } from './helloworkerclass';
+import HelloWorkerClass from './helloworkerclass';
 
 self.addEventListener('fetch', (event: Event) => {
   const worker = new HelloWorkerClass();
