@@ -24,8 +24,9 @@
   },
   "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme",
   "types": "index.d.ts",
-  "devDependencies": {
-    "@udacity/types-cloudflare-worker": "^1.0.0-rc1",
+  "dependencies": {
+    "@udacity/types-cloudflare-worker": "^1.0.0-rc2",
+    "@udacity/types-service-worker-mock": "^1.0.0-rc2",
     "service-worker-mock": "^2.0.0"
   }
 }
