@@ -4,5 +4,6 @@ module.exports = {
   automock: false,
   setupFiles: [
     "./test/setupJest.ts"
-  ]
+  ],
+  modulePathIgnorePatterns: ["node_modules", "packages"]
 };
