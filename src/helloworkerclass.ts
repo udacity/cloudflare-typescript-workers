@@ -1,18 +1,7 @@
-import { CloudFlareRequestInit } from '@udacity/types-cloudflare-worker';
-
 export class HelloWorkerClass {
   private responseInit = {
     headers: { 'Content-Type': 'application/json' },
     status: 200,
-  };
-
-  private cfDefaults: CloudFlareRequestInit = {
-    cf: {
-      cacheKey: 'hello-world',
-      minify: {
-        html: true,
-      },
-    },
   };
 
   public async handle(event: FetchEvent) {
@@ -22,7 +11,14 @@ export class HelloWorkerClass {
     let response = await cache.match(request);
 
     if (!response) {
-      const originResponse = await fetch(request, this.cfDefaults);
+      const originResponse = await fetch(request, {
+        cf: {
+          cacheKey: 'hello-world',
+          minify: {
+            html: true,
+          },
+        },
+      });
       let body = 'Hello ';
 
       if (originResponse.status === 200) {

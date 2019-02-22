@@ -5,46 +5,7 @@
 
 declare global {
   interface Request {
-    /**
-     * CloudFlare Request Attributes
-     *
-     * Workers allows you to run custom logic based for any incoming request. In
-     * addition to the information available on the Request object, such as
-     * headers, Cloudflare provides additional attributes of the request using
-     * the request.cf object.
-     *
-     * Attributes available on request.cf:
-     * * tlsVersion: the TLS version used on the connection to Cloudflare.
-     * * tlsCipher: the cipher used on the connection to Cloudflare.
-     * * country: the two letter country code on the request (this is the same
-     *   value as the one provided by the CF-IPCountry header)
-     * * colo: the three letter airport code of the colo the request hit.
-     *
-     * Attributes available through headers:
-     * * Client IP: the client IP is available via the CF-Connecting-IP header.
-     */
-    cf: {
-      /**
-       * The TLS version used on the connection to Cloudflare.
-       */
-      tlsVersion: string;
-
-      /**
-       * The cipher used on the connection to Cloudflare.
-       */
-      tlsCipher: string;
-
-      /**
-       * The two letter country code on the request (this is the same value as
-       * the one provided by the CF-IPCountry header.)
-       */
-      country: string;
-
-      /**
-       * The three letter airport code of the colo the request hit.
-       */
-      colo: string;
-    };
+    cf: CloudFlareRequestAttributes; // extends, therefore includes CloudFlareRequestFeatures
   }
 
   /**
@@ -66,6 +27,15 @@ declare global {
      */
     default: CloudFlareDefaultCacheStorage;
   }
+
+  // Overload fetch to accept the CloudFlareRequestInit interface
+  interface GlobalFetch {
+    fetch(input: RequestInfo, init?: CloudFlareRequestInit): Promise<Response>;
+  }
+  interface WindowOrWorkerGlobalScope {
+    fetch(input: RequestInfo, init?: CloudFlareRequestInit): Promise<Response>;
+  }
+  function fetch(input: RequestInfo, init?: CloudFlareRequestInit): Promise<Response>;
 }
 
 /**
@@ -101,6 +71,47 @@ export interface CloudflareCacheStorage {
 // match the Cloudflare implementation.
 export interface CloudflareWorkerGlobalScopePatch {
   caches: CloudflareCacheStorage;
+}
+
+/**
+ * CloudFlare Request Attributes
+ *
+ * Workers allows you to run custom logic based for any incoming request. In
+ * addition to the information available on the Request object, such as
+ * headers, Cloudflare provides additional attributes of the request using
+ * the request.cf object.
+ *
+ * Attributes available on request.cf:
+ * * tlsVersion: the TLS version used on the connection to Cloudflare.
+ * * tlsCipher: the cipher used on the connection to Cloudflare.
+ * * country: the two letter country code on the request (this is the same
+ *   value as the one provided by the CF-IPCountry header)
+ * * colo: the three letter airport code of the colo the request hit.
+ *
+ * Attributes available through headers:
+ * * Client IP: the client IP is available via the CF-Connecting-IP header.
+ */
+export interface CloudFlareRequestAttributes extends CloudFlareRequestFeatures {
+  /**
+   * The TLS version used on the connection to Cloudflare.
+   */
+  readonly tlsVersion: string;
+
+  /**
+   * The cipher used on the connection to Cloudflare.
+   */
+  readonly tlsCipher: string;
+
+  /**
+   * The two letter country code on the request (this is the same value as
+   * the one provided by the CF-IPCountry header.)
+   */
+  readonly country: string;
+
+  /**
+   * The three letter airport code of the colo the request hit.
+   */
+  readonly colo: string;
 }
 
 // An interface for controlling Cloudflare Features on Requests. Reference:
@@ -274,9 +285,5 @@ export interface CloudFlareRequestInit extends RequestInit {
    * want. Currently, settings in the cf object cannot be tested in the live
    * preview.
    */
-  cf: CloudFlareRequestFeatures;
+  cf: CloudFlareRequestFeatures; // Features, not Attributes, because Attributes are readonly.
 }
-
-// Overload fetch to accept the CloudFlareRequestInit interface
-// declare function fetch(input: RequestInfo, init?: CloudFlareRequestInit
-//  | RequestInit | undefined): Promise<Response>;
