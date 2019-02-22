@@ -2,9 +2,10 @@
   "name": "@udacity/types-cloudflare-worker",
   "version": "1.0.0-rc3",
   "description": "TypeScript types for the Cloudflare Worker API",
-  "main": "global.ts",
+  "main": "global.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "tsc"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,10 @@
   "bugs": {
     "url": "https://github.com/udacity/cloudflare-typescript-workers/issues"
   },
-  "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme"
+  "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme",
+  "types": "global.d.ts",
+  "files": [
+    "global.js",
+    "global.d.ts"
+  ]
 }

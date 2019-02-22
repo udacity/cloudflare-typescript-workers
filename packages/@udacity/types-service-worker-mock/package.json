@@ -2,9 +2,10 @@
   "name": "@udacity/types-service-worker-mock",
   "version": "1.0.0-rc3",
   "description": "TypeScript types for service-worker-mock",
-  "main": "src/global.ts",
+  "main": "global.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "tsc"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,12 @@
     "url": "https://github.com/udacity/cloudflare-typescript-workers/issues"
   },
   "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme",
-  "types": "src/index.d.ts",
+  "types": "index.d.ts",
+  "files": [
+    "global.js",
+    "global.d.ts",
+    "index.d.ts"
+  ],
   "dependencies": {
     "service-worker-mock": "^2.0.0"
   }
