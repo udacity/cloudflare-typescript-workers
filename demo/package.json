@@ -1,0 +1,39 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "Demo of using the npmjs.com packages",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --progress --mode production # Create minified output, runs in Cloudflare",
+    "build-dev": "webpack --progress --mode none # Creates readable output, runs in Cloudflare",
+    "lint": "tslint --project tsconfig.json",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/udacity/cloudflare-typescript-workers.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/udacity/cloudflare-typescript-workers/issues"
+  },
+  "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.6",
+    "@types/node": "^11.9.4",
+    "@udacity/cloudflare-worker-mock": "^1.0.0-rc4",
+    "@udacity/types-cloudflare-worker": "^1.0.0-rc4",
+    "@udacity/types-service-worker-mock": "^1.0.0-rc4",
+    "jest": "^24.1.0",
+    "jest-fetch-mock": "^2.1.1",
+    "service-worker-mock": "^2.0.0",
+    "ts-jest": "^24.0.0",
+    "ts-loader": "^5.3.3",
+    "tslint": "^5.12.1",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.3.3",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  }
+}
