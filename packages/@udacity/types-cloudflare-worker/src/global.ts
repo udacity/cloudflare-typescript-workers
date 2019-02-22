@@ -176,7 +176,7 @@ export interface CloudFlareRequestFeatures {
    * the external hostname, then set resolveOverride to point to that CNAME
    * record.
    */
-  resolveOverride?: boolean;
+  resolveOverride?: string;
 
   /**
    * Set cache key for this request.
