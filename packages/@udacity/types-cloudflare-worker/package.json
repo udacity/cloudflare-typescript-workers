@@ -1,6 +1,6 @@
 {
   "name": "@udacity/types-cloudflare-worker",
-  "version": "1.0.0-rc5",
+  "version": "1.0.0-rc6",
   "description": "TypeScript types for the Cloudflare Worker API",
   "main": "global.js",
   "scripts": {
