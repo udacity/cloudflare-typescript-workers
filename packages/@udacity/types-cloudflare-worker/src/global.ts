@@ -258,6 +258,17 @@ export interface CloudFlareRequestFeatures {
    * wish to cache non-static
    */
   cacheTtlByStatus?: { [key: string]: number };
+
+  /**
+   * Setting the cache level to Cache Everything will override the default
+   * “cacheability” of the asset. For TTL, Cloudflare will still rely on headers
+   * set by the origin.
+   *
+   * Note: This feature is only listed on
+   * https://developers.cloudflare.com/workers/recipes/vcl-conversion/controlling-the-cache/
+   * and not the primary API documentation page.
+   */
+  cacheEverything?: boolean;
 }
 
 export interface CloudFlareRequestInit extends RequestInit {
