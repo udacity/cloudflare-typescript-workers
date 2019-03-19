@@ -42,10 +42,14 @@ declare global {
 }
 
 /**
- * A type of the ServiceWorkerGlobalScope which will include
+ * CloudflareWorkerGlobalScope extends the ServiceWorkerGlobalScope to include
  * CloudflareWorkerGlobalScopePatch when created with makeCloudflareWorkerEnv().
+ *
+ * ServiceWorkerGlobalScope could be used instead of this empty extends, but
+ * this makes the developer experience more consistent and allows for easier
+ * upgrades if/when changes are implemented.
  */
-export type CloudflareWorkerGlobalScope = ServiceWorkerGlobalScope;
+export interface CloudflareWorkerGlobalScope extends ServiceWorkerGlobalScope {}
 export default CloudflareWorkerGlobalScope;
 
 export interface CloudFlareCacheQueryOptions {
