@@ -1,6 +1,6 @@
 {
   "name": "@udacity/cloudflare-worker-mock",
-  "version": "1.0.0-rc6",
+  "version": "1.0.0-rc7",
   "description": "Mocks for the Cloudflare Worker API",
   "main": "index.js",
   "scripts": {

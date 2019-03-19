@@ -1,6 +1,6 @@
 {
   "name": "@udacity/types-service-worker-mock",
-  "version": "1.0.0-rc6",
+  "version": "1.0.0-rc7",
   "description": "TypeScript types for service-worker-mock",
   "main": "global.js",
   "scripts": {
