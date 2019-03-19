@@ -7,6 +7,7 @@
     "packages": "cd packages/@udacity/cloudflare-worker-mock;npm run prepublish;cd ../types-cloudflare-worker;npm run prepublish;cd ../types-service-worker-mock;npm run prepublish;",
     "build": "webpack --progress --mode production # Create minified output, runs in Cloudflare",
     "build-dev": "webpack --progress --mode none # Creates readable output, runs in Cloudflare",
+    "test-all": "npm run packages; npm run lint; jest; npm run test-demo;",
     "test": "jest",
     "test-demo": "cp src/* demo/src/;cp test/* demo/test/;cd demo;jest",
     "lint": "tslint --project tsconfig.json packages/*/*.ts packages/*/*.d.ts src/*.ts test/*.ts",
