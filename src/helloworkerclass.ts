@@ -27,7 +27,10 @@ export class HelloWorkerClass {
         body = await originResponse.text();
       }
 
-      response = new Response(`${body} ${request.cf.country}!`, this.responseInit);
+      response = new Response(
+        `${body} ${request.cf.country}!`,
+        this.responseInit,
+      );
     }
 
     return response;

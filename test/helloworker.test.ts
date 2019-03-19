@@ -31,7 +31,6 @@ declare var self: CloudflareWorkerGlobalScope;
 import makeCloudflareWorkerEnv from '@udacity/cloudflare-worker-mock';
 
 describe('helloworker', () => {
-
   beforeEach(() => {
     // Merge the Cloudflare Worker Environment into the global scope.
     Object.assign(global, makeCloudflareWorkerEnv());
@@ -51,9 +50,14 @@ describe('helloworker', () => {
     let putCalled = false;
     // Replace the default put() implementation.
     // TODO: Make this cleaner.
-    caches.default.put = (_request: Request, _response: Response): Promise<undefined> => {
+    caches.default.put = (
+      _request: Request,
+      _response: Response,
+    ): Promise<undefined> => {
       putCalled = true;
-      return new Promise<undefined>((resolve, _reject) => { resolve(undefined); });
+      return new Promise<undefined>((resolve, _reject) => {
+        resolve(undefined);
+      });
     };
 
     const request = new Request('/path');

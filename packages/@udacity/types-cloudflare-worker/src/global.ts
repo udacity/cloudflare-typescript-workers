@@ -35,7 +35,10 @@ declare global {
   interface WindowOrWorkerGlobalScope {
     fetch(input: RequestInfo, init?: CloudFlareRequestInit): Promise<Response>;
   }
-  function fetch(input: RequestInfo, init?: CloudFlareRequestInit): Promise<Response>;
+  function fetch(
+    input: RequestInfo,
+    init?: CloudFlareRequestInit,
+  ): Promise<Response>;
 }
 
 /**
@@ -59,8 +62,14 @@ export interface CloudFlareCacheQueryOptions {
  */
 export interface CloudFlareDefaultCacheStorage {
   put(request: Request | string, response: Response): Promise<undefined>;
-  match(request: Request | string, options?: CloudFlareCacheQueryOptions): Promise<Response | undefined>;
-  delete(request: Request | string, options?: CloudFlareCacheQueryOptions): Promise<boolean>;
+  match(
+    request: Request | string,
+    options?: CloudFlareCacheQueryOptions,
+  ): Promise<Response | undefined>;
+  delete(
+    request: Request | string,
+    options?: CloudFlareCacheQueryOptions,
+  ): Promise<boolean>;
 }
 
 export interface CloudflareCacheStorage {

@@ -4,10 +4,14 @@
 // instead of ServiceWorkerGlobalScopeMock.
 // ref: https://github.com/pinterest/service-workers/issues/110
 
-export { };
+export {};
 declare global {
-  type ServiceWorkerGlobalScopeEventListener = <K extends keyof ServiceWorkerGlobalScopeEventMap>(
-    this: ServiceWorkerGlobalScope, ev: K) => any;
+  type ServiceWorkerGlobalScopeEventListener = <
+    K extends keyof ServiceWorkerGlobalScopeEventMap
+  >(
+    this: ServiceWorkerGlobalScope,
+    ev: K,
+  ) => any;
 
   interface ServiceWorkerListener {
     [key: string]: ServiceWorkerGlobalScopeEventListener;
