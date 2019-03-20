@@ -24,7 +24,9 @@ import '@udacity/types-service-worker-mock/global';
 
 import {
   CloudflareCacheQueryOptions,
+  CloudflareWorkerGlobalKVPatch,
   CloudflareWorkerGlobalScopePatch,
+  CloudflareWorkerKV,
 } from '@udacity/types-cloudflare-worker';
 import makeServiceWorkerEnv from 'service-worker-mock';
 import { EnvOptions } from 'service-worker-mock';
@@ -65,6 +67,36 @@ export function makeCloudflareWorkerEnv(
   };
 
   return cloudflareWorkerEnv;
+}
+
+/**
+ * Create a mock KV for a Cloudflare Worker
+ */
+export function makeCloudflareWorkerKVEnv(
+  name: string,
+): CloudflareWorkerGlobalKVPatch {
+  const cloudflareWorkerKV: CloudflareWorkerKV = {
+    get(
+      _key: string,
+      _type?: 'text' | 'json' | 'arrayBuffer' | 'stream',
+    ): Promise<string | any | ArrayBuffer | ReadableStream> {
+      return Promise.resolve(undefined);
+    },
+    put(
+      _key: string,
+      _value: string | ReadableStream | ArrayBuffer | FormData,
+    ): Promise<void> {
+      return Promise.resolve(undefined);
+    },
+    delete(_key: string): Promise<void> {
+      return Promise.resolve(undefined);
+    },
+  };
+
+  const cloudflareWorkerKVEnv = {
+    [name]: cloudflareWorkerKV,
+  };
+  return cloudflareWorkerKVEnv;
 }
 
 export default makeCloudflareWorkerEnv;

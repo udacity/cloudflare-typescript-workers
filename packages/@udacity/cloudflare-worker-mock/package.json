@@ -31,8 +31,8 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "@udacity/types-cloudflare-worker": "^1.0.0-rc7",
-    "@udacity/types-service-worker-mock": "^1.0.0-rc7"
+    "@udacity/types-cloudflare-worker": "^1.0.0-rc8",
+    "@udacity/types-service-worker-mock": "^1.0.0-rc8"
   },
   "dependencies": {
     "service-worker-mock": "^2.0.0"

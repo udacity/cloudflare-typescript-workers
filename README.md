@@ -24,7 +24,7 @@ development of Cloudflare Workers using TypeScript:
 * `types-cloudflare-worker` - Complete types for all public features provided by
   Cloudflare Workers. Supports the `Request.cf` object and the Cache API.
 * `cloudflare-worker-mock` - Wraps `service-worker-mock` for name consistency
-  developer experience and to provide a simple mockable Cache API
+  developer experience and to provide a simple mockable Cache API and KV
   implementation.
 
 ## Testing and deploying the packages

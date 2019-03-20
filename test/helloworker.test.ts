@@ -41,15 +41,22 @@ limitations under the License.
  * https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
  */
 
-import { CloudflareWorkerGlobalScope } from '@udacity/types-cloudflare-worker';
+import {
+  CloudflareWorkerGlobalScope,
+  CloudflareWorkerKVOptions,
+} from '@udacity/types-cloudflare-worker';
 declare var self: CloudflareWorkerGlobalScope;
 
-import makeCloudflareWorkerEnv from '@udacity/cloudflare-worker-mock';
+import makeCloudflareWorkerEnv, {
+  makeCloudflareWorkerKVEnv,
+} from '@udacity/cloudflare-worker-mock';
 
 describe('helloworker', () => {
   beforeEach(() => {
     // Merge the Cloudflare Worker Environment into the global scope.
     Object.assign(global, makeCloudflareWorkerEnv());
+    // Merge the named KV into the global scope
+    Object.assign(global, makeCloudflareWorkerKVEnv('countryCodeKV'));
     // Clear all module imports.
     jest.resetModules();
     // Import and init the Worker.
@@ -60,20 +67,38 @@ describe('helloworker', () => {
     expect(self.listeners.get('fetch')).toBeDefined();
   });
 
-  it('should return Hello US!', async () => {
+  it('should return Hello US +1!', async () => {
     fetchMock.mockResponseOnce('Hello');
 
-    let putCalled = false;
-    // Replace the default put() implementation.
+    let putCacheCalled = false;
+    // Mock the default put() implementation.
     // TODO: Make this cleaner.
     caches.default.put = (
       _request: Request,
       _response: Response,
     ): Promise<undefined> => {
-      putCalled = true;
-      return new Promise<undefined>((resolve, _reject) => {
-        resolve(undefined);
-      });
+      putCacheCalled = true;
+      return Promise.resolve(undefined);
+    };
+
+    // Setup mock responses for the KV put() and get().
+    let putKVCalled = false;
+    countryCodeKV.put = (
+      _key: string,
+      _value: string | ReadableStream | ArrayBuffer | FormData,
+      _options?: CloudflareWorkerKVOptions,
+    ): Promise<void> => {
+      putKVCalled = true;
+      return Promise.resolve();
+    };
+
+    let getKVCalled = false;
+    countryCodeKV.get = (
+      _key: string,
+      _type?: 'text' | 'json' | 'arrayBuffer' | 'stream',
+    ): Promise<string | any | ArrayBuffer | ReadableStream> => {
+      getKVCalled = true;
+      return Promise.resolve('+1');
     };
 
     const request = new Request('/path');
@@ -87,7 +112,9 @@ describe('helloworker', () => {
 
     expect(fetchMock).toBeCalledTimes(1);
     expect(response[0].status).toBe(200);
-    expect(await response[0].text()).toBe('Hello US!');
-    expect(putCalled).toBe(true);
+    expect(await response[0].text()).toBe('Hello US +1!');
+    expect(putCacheCalled).toBe(true);
+    expect(putKVCalled).toBe(true);
+    expect(getKVCalled).toBe(true);
   });
 });
