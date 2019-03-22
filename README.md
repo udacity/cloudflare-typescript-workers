@@ -60,3 +60,11 @@ npm i
 jest
 npm run build
 ```
+
+## License
+
+Licensed under the Apache License, Version 2.0.
+
+© 2019 Udacity, Inc.
+
+Content derived from Cloudflare Developer Documentation. © 2019 Cloudflare, Inc.

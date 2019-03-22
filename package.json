@@ -24,7 +24,7 @@
     "url": "git+https://github.com/udacity/cloudflare-typescript-workers.git"
   },
   "author": "Brad Erickson <bderickson@gmail.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/udacity/cloudflare-typescript-workers/issues"
   },

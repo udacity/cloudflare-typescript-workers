@@ -27,7 +27,8 @@
   "types": "index.d.ts",
   "files": [
     "index.j",
-    "index.d.ts"
+    "index.d.ts",
+    "LICENSE"
   ],
   "peerDependencies": {
     "@udacity/types-cloudflare-worker": "^1.0.0-rc7",

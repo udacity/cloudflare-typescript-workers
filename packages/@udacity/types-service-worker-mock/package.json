@@ -27,7 +27,8 @@
   "files": [
     "global.js",
     "global.d.ts",
-    "index.d.ts"
+    "index.d.ts",
+    "LICENSE"
   ],
   "dependencies": {
     "service-worker-mock": "^2.0.0"

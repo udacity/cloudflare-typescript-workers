@@ -26,6 +26,7 @@
   "types": "global.d.ts",
   "files": [
     "global.js",
-    "global.d.ts"
+    "global.d.ts",
+    "LICENSE"
   ]
 }
