@@ -6,7 +6,7 @@
 // Import the service-worker-mock global augmentations.
 import '@udacity/types-service-worker-mock/global';
 
-import { CloudFlareCacheQueryOptions, CloudflareWorkerGlobalScopePatch } from '@udacity/types-cloudflare-worker';
+import { CloudflareCacheQueryOptions, CloudflareWorkerGlobalScopePatch } from '@udacity/types-cloudflare-worker';
 import makeServiceWorkerEnv from 'service-worker-mock';
 import { EnvOptions } from 'service-worker-mock';
 
@@ -22,10 +22,10 @@ export function makeCloudflareWorkerEnv(envOptions?: EnvOptions): CloudflareWork
       put(_request: Request, _response: Response): Promise<undefined> {
         return new Promise<undefined>((resolve, _reject) => { resolve(undefined); });
       },
-      match(_request: Request, _options?: CloudFlareCacheQueryOptions): Promise<Response | undefined> {
+      match(_request: Request, _options?: CloudflareCacheQueryOptions): Promise<Response | undefined> {
         return new Promise<undefined>((resolve, _reject) => { resolve(undefined); });
       },
-      delete(_request: Request, _options?: CloudFlareCacheQueryOptions): Promise<boolean> {
+      delete(_request: Request, _options?: CloudflareCacheQueryOptions): Promise<boolean> {
         return new Promise<boolean>((resolve, _reject) => { resolve(false); });
       },
     },

@@ -5,11 +5,11 @@
 
 declare global {
   interface Request {
-    cf: CloudFlareRequestAttributes; // extends, therefore includes CloudFlareRequestFeatures
+    cf: CloudflareRequestAttributes; // extends, therefore includes CloudflareRequestFeatures
   }
 
   /**
-   * CloudFlare Cache Storage
+   * Cloudflare Cache Storage
    *
    * The Cache API gives you fine grained control of reading and writing from
    * cache, and deciding exactly when to fetch data from your origin.
@@ -25,19 +25,19 @@ declare global {
      * caches.default. This differs from web browsers’ Cache API in that they do
      * not expose any default cache object.
      */
-    default: CloudFlareDefaultCacheStorage;
+    default: CloudflareDefaultCacheStorage;
   }
 
-  // Overload fetch to accept the CloudFlareRequestInit interface
+  // Overload fetch to accept the CloudflareRequestInit interface
   interface GlobalFetch {
-    fetch(input: RequestInfo, init?: CloudFlareRequestInit): Promise<Response>;
+    fetch(input: RequestInfo, init?: CloudflareRequestInit): Promise<Response>;
   }
   interface WindowOrWorkerGlobalScope {
-    fetch(input: RequestInfo, init?: CloudFlareRequestInit): Promise<Response>;
+    fetch(input: RequestInfo, init?: CloudflareRequestInit): Promise<Response>;
   }
   function fetch(
     input: RequestInfo,
-    init?: CloudFlareRequestInit,
+    init?: CloudflareRequestInit,
   ): Promise<Response>;
 }
 
@@ -52,7 +52,7 @@ declare global {
 export interface CloudflareWorkerGlobalScope extends ServiceWorkerGlobalScope {}
 export default CloudflareWorkerGlobalScope;
 
-export interface CloudFlareCacheQueryOptions {
+export interface CloudflareCacheQueryOptions {
   /**
    * Consider the request method to be GET, regardless of its actual value.
    */
@@ -64,20 +64,20 @@ export interface CloudFlareCacheQueryOptions {
  * string value as its first parameter. If a string is passed, it will be
  * interpreted as the URL for a new Request object.
  */
-export interface CloudFlareDefaultCacheStorage {
+export interface CloudflareDefaultCacheStorage {
   put(request: Request | string, response: Response): Promise<undefined>;
   match(
     request: Request | string,
-    options?: CloudFlareCacheQueryOptions,
+    options?: CloudflareCacheQueryOptions,
   ): Promise<Response | undefined>;
   delete(
     request: Request | string,
-    options?: CloudFlareCacheQueryOptions,
+    options?: CloudflareCacheQueryOptions,
   ): Promise<boolean>;
 }
 
 export interface CloudflareCacheStorage {
-  default: CloudFlareDefaultCacheStorage;
+  default: CloudflareDefaultCacheStorage;
 }
 
 // Does not extend ServiceWorkerGlobalScope because we are entirely replacing to
@@ -87,7 +87,7 @@ export interface CloudflareWorkerGlobalScopePatch {
 }
 
 /**
- * CloudFlare Request Attributes
+ * Cloudflare Request Attributes
  *
  * Workers allows you to run custom logic based for any incoming request. In
  * addition to the information available on the Request object, such as headers,
@@ -110,7 +110,7 @@ export interface CloudflareWorkerGlobalScopePatch {
  * https://developers.cloudflare.com/workers/recipes/tls-version-blocking/
  *
  */
-export interface CloudFlareRequestAttributes extends CloudFlareRequestFeatures {
+export interface CloudflareRequestAttributes extends CloudflareRequestFeatures {
   /**
    * The TLS version used on the connection to Cloudflare.
    */
@@ -135,7 +135,7 @@ export interface CloudFlareRequestAttributes extends CloudFlareRequestFeatures {
 
 // An interface for controlling Cloudflare Features on Requests. Reference:
 // https://developers.cloudflare.com/workers/reference/cloudflare-features/
-export interface CloudFlareRequestFeatures {
+export interface CloudflareRequestFeatures {
   /**
    * Sets Polish mode. The possible values are "lossy", "lossless", or "off".
    */
@@ -290,7 +290,7 @@ export interface CloudFlareRequestFeatures {
   cacheEverything?: boolean;
 }
 
-export interface CloudFlareRequestInit extends RequestInit {
+export interface CloudflareRequestInit extends RequestInit {
   /**
    * Controlling Cloudflare Features
    * You can use a Worker to control how other Cloudflare features affect the
@@ -315,5 +315,5 @@ export interface CloudFlareRequestInit extends RequestInit {
    * want. Currently, settings in the cf object cannot be tested in the live
    * preview.
    */
-  cf: CloudFlareRequestFeatures; // Features, not Attributes, because Attributes are readonly.
+  cf: CloudflareRequestFeatures; // Features, not Attributes, because Attributes are readonly.
 }

@@ -29,9 +29,11 @@
     "index.j",
     "index.d.ts"
   ],
+  "peerDependencies": {
+    "@udacity/types-cloudflare-worker": "^1.0.0-rc7",
+    "@udacity/types-service-worker-mock": "^1.0.0-rc7"
+  },
   "dependencies": {
-    "@udacity/types-cloudflare-worker": "^1.0.0-rc3",
-    "@udacity/types-service-worker-mock": "^1.0.0-rc3",
     "service-worker-mock": "^2.0.0"
   }
 }

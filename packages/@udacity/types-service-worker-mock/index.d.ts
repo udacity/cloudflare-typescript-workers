@@ -3,6 +3,8 @@ declare module 'service-worker-mock' {
     [key: string]: string;
   }
 
-  function makeServiceWorkerEnv(envOptions?: EnvOptions): ServiceWorkerGlobalScope;
+  function makeServiceWorkerEnv(
+    envOptions?: EnvOptions,
+  ): ServiceWorkerGlobalScope;
   export default makeServiceWorkerEnv;
 }
