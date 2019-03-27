@@ -83,10 +83,10 @@
   },
   "include": [
     "src/**/*",
+    "packages/**/*",
     "test/**/*"
   ],
   "exclude": [
-    "packages",
     "demo"
   ]
 }

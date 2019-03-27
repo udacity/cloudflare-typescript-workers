@@ -49,6 +49,7 @@ declare global {
  * this makes the developer experience more consistent and allows for easier
  * upgrades if/when changes are implemented.
  */
+// tslint:disable-next-line:no-empty-interface
 export interface CloudflareWorkerGlobalScope extends ServiceWorkerGlobalScope {}
 export default CloudflareWorkerGlobalScope;
 
