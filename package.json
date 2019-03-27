@@ -4,7 +4,10 @@
   "description": "A tested Hello World Cloudflare Worker written in TypeScript",
   "main": "src/helloworker.ts",
   "scripts": {
-    "packages": "cd packages/@udacity/cloudflare-worker-mock;rm -rf node_modules;cp -R ../../../node_modules .;npm run prepublish;cd ../types-cloudflare-worker;npm run prepublish;cd ../types-service-worker-mock;npm run prepublish;",
+    "package-types-cloudflare-worker": "cd packages/@udacity/types-cloudflare-worker; npm run prepublish",
+    "package-types-service-worker-mock": "cd packages/@udacity/types-service-worker-mock;npm run prepublish",
+    "package-cloudflare-worker-mock": "cd packages/@udacity/cloudflare-worker-mock;rm -rf node_modules/@udacity; mkdir -p node_modules/@udacity; cp -R ../types-cloudflare-worker node_modules/@udacity; cp -R ../types-service-worker-mock node_modules/@udacity; npm run prepublish",
+    "packages": "npm run package-types-cloudflare-worker && npm run package-types-service-worker-mock; npm run package-cloudflare-worker-mock",
     "build": "webpack --progress --mode production # Create minified output, runs in Cloudflare",
     "build-dev": "webpack --progress --mode none # Creates readable output, runs in Cloudflare",
     "test-all": "npm run packages; npm run lint; jest; npm run test-demo;",
