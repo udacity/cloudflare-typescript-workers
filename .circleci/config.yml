@@ -1,0 +1,36 @@
+version: 2
+
+build-defaults: &build-defaults
+  docker:
+    - image: circleci/node:8.12.0-browsers
+
+jobs:
+  test:
+    <<: *build-defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: &cache_key dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Setup
+          command: npm i
+      - run:
+          name: Run Tests
+          command: npm run test-all
+      - run:
+          name: Test Building development
+          command: npm run build
+      - run:
+          name: Test Building demo
+          command: npm run build-demo
+      - save_cache:
+          key: *cache_key
+          paths:
+            - ./node_modules
+
+workflows:
+  version: 2
+  test:
+      jobs:
+        - test:
+            context: org-global

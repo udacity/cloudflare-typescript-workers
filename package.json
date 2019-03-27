@@ -10,11 +10,13 @@
     "packages": "npm run package-types-cloudflare-worker && npm run package-types-service-worker-mock; npm run package-cloudflare-worker-mock",
     "build": "webpack --progress --mode production # Create minified output, runs in Cloudflare",
     "build-dev": "webpack --progress --mode none # Creates readable output, runs in Cloudflare",
-    "test-all": "npm run packages && npm run lint && jest",
+    "build-demo": "cd demo; npm run build",
     "test": "jest",
-    "test-demo": "cp src/* demo/src/;cp test/* demo/test/;cd demo;jest",
-    "lint": "tslint --project tsconfig.json packages/*/*.ts packages/*/*.d.ts src/*.ts test/*.ts",
-    "lint-fix": "tslint --project tsconfig.json --fix",
+    "update-demo": "cp src/* demo/src/; cp test/* demo/test/; # Demo updated on version releases",
+    "test-demo": "cd demo; jest",
+    "test-all": "npm run packages && npm run lint && jest && npm run test-demo",
+    "lint": "tslint --project tsconfig.tslint.json --force",
+    "lint-fix": "tslint --project tsconfig.tslint.json --fix",
     "clean": "git clean -xdf"
   },
   "repository": {

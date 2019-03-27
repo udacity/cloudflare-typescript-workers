@@ -83,6 +83,7 @@
   },
   "include": [
     "src/**/*",
+    "packages/**/*", // THE ONLY DIFFERENCE VERSES tsconfig.json
     "test/**/*"
   ],
   "exclude": [
