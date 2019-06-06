@@ -15,6 +15,9 @@ jobs:
           name: Setup
           command: npm i
       - run:
+          name: Run Linter
+          command: ./node_modules/tslint/bin/tslint --project tsconfig.tslint.json --force | tee /tmp/test && ! grep -q WARNING /tmp/test
+      - run:
           name: Run Tests
           command: npm run test-all
       - run:
