@@ -19,8 +19,10 @@ TypeScript types are usable.
 This project exists to develop, test and deploy three packages supporting the
 development of Cloudflare Workers using TypeScript:
 
-* `types-service-worker-mock` - Incomplete types for the
-  `pinterest/service-worker-mock` to support Cloudflare Worker Testing. This may be pushed to the NPM `@types` project in the future, but needs additional work before that is reasonable.
+* `@udacity/types-service-worker-mock` - Incomplete types for the
+  `pinterest/service-worker-mock` to support Cloudflare Worker Testing. This may
+  be pushed to the NPM `@types` project in the future, but needs additional work
+  before that is reasonable.
 * `types-cloudflare-worker` - Complete types for all public features provided by
   Cloudflare Workers. Supports the `Request.cf` object and the Cache API.
 * `cloudflare-worker-mock` - Wraps `service-worker-mock` for name consistency

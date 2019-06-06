@@ -1,8 +1,8 @@
 {
-  "name": "@udacity/types-cloudflare-worker",
+  "name": "cloudflare-worker-mock",
   "version": "1.0.0-rc8",
-  "description": "TypeScript types for the Cloudflare Worker API",
-  "main": "global.js",
+  "description": "Mocks for the Cloudflare Worker API",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "tsc"
@@ -15,7 +15,8 @@
     "cloudflare",
     "workers",
     "typescript",
-    "types"
+    "mock",
+    "testing"
   ],
   "author": "Brad Erickson <bderickson@gmail.com>",
   "license": "Apache-2.0",
@@ -23,10 +24,17 @@
     "url": "https://github.com/udacity/cloudflare-typescript-workers/issues"
   },
   "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme",
-  "types": "global.d.ts",
+  "types": "index.d.ts",
   "files": [
-    "global.js",
-    "global.d.ts",
+    "index.j",
+    "index.d.ts",
     "LICENSE"
-  ]
+  ],
+  "peerDependencies": {
+    "types-cloudflare-worker": "^1.0.0-rc8",
+    "@udacity/types-service-worker-mock": "^1.0.0-rc8"
+  },
+  "dependencies": {
+    "service-worker-mock": "^2.0.0"
+  }
 }

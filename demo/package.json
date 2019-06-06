@@ -22,9 +22,9 @@
   "devDependencies": {
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.5",
-    "@udacity/cloudflare-worker-mock": "^1.0.0-rc7",
-    "@udacity/types-cloudflare-worker": "^1.0.0-rc7",
-    "@udacity/types-service-worker-mock": "^1.0.0-rc7",
+    "@udacity/cloudflare-worker-mock": "^1.0.0-rc8",
+    "@udacity/types-cloudflare-worker": "^1.0.0-rc8",
+    "@udacity/types-service-worker-mock": "^1.0.0-rc8",
     "jest": "^24.8.0",
     "jest-fetch-mock": "^2.1.2",
     "service-worker-mock": "^2.0.3",

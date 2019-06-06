@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import CloudflareWorkerGlobalScope from '@udacity/types-cloudflare-worker';
+import CloudflareWorkerGlobalScope from 'types-cloudflare-worker';
 declare var self: CloudflareWorkerGlobalScope;
 
 import HelloWorkerClass from './helloworkerclass';

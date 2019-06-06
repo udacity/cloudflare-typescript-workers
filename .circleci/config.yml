@@ -2,7 +2,7 @@ version: 2
 
 build-defaults: &build-defaults
   docker:
-    - image: circleci/node:8.12.0-browsers
+    - image: circleci/node:10.16-jessie
 
 jobs:
   test:
@@ -13,7 +13,10 @@ jobs:
           key: &cache_key dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Setup
-          command: npm i
+          command: |
+            npm i
+            cd demo
+            npm i
       - run:
           name: Run Linter
           command: ./node_modules/tslint/bin/tslint --project tsconfig.tslint.json --force | tee /tmp/test && ! grep -q WARNING /tmp/test

@@ -22,14 +22,14 @@ limitations under the License.
 // Import the service-worker-mock global augmentations.
 import '@udacity/types-service-worker-mock/global';
 
+import makeServiceWorkerEnv from 'service-worker-mock';
+import { EnvOptions } from 'service-worker-mock';
 import {
   CloudflareCacheQueryOptions,
   CloudflareWorkerGlobalKVPatch,
   CloudflareWorkerGlobalScopePatch,
   CloudflareWorkerKV,
-} from '@udacity/types-cloudflare-worker';
-import makeServiceWorkerEnv from 'service-worker-mock';
-import { EnvOptions } from 'service-worker-mock';
+} from 'types-cloudflare-worker';
 
 /**
  * Create a mock environment for a Cloudflare Worker with a mockable cache layer.

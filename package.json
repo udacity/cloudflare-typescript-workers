@@ -4,9 +4,9 @@
   "description": "A tested Hello World Cloudflare Worker written in TypeScript",
   "main": "src/helloworker.ts",
   "scripts": {
-    "package-types-cloudflare-worker": "cd packages/@udacity/types-cloudflare-worker; npm run prepublish",
+    "package-types-cloudflare-worker": "cd packages/types-cloudflare-worker; npm run prepublish",
     "package-types-service-worker-mock": "cd packages/@udacity/types-service-worker-mock;npm run prepublish",
-    "package-cloudflare-worker-mock": "cd packages/@udacity/cloudflare-worker-mock;rm -rf node_modules/@udacity; mkdir -p node_modules/@udacity; cp -R ../types-cloudflare-worker node_modules/@udacity; cp -R ../types-service-worker-mock node_modules/@udacity; npm run prepublish",
+    "package-cloudflare-worker-mock": "cd packages/cloudflare-worker-mock && rm -rf node_modules/@udacity && mkdir -p node_modules/@udacity && cp -R ../types-cloudflare-worker node_modules && cp -R ../@udacity/types-service-worker-mock node_modules/@udacity && npm run prepublish",
     "packages": "npm run package-types-cloudflare-worker && npm run package-types-service-worker-mock; npm run package-cloudflare-worker-mock",
     "build": "webpack --progress --mode production # Create minified output, runs in Cloudflare",
     "build-dev": "webpack --progress --mode none # Creates readable output, runs in Cloudflare",
@@ -32,8 +32,8 @@
   "devDependencies": {
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.5",
-    "@udacity/cloudflare-worker-mock": "file:./packages/@udacity/cloudflare-worker-mock",
-    "@udacity/types-cloudflare-worker": "file:./packages/@udacity/types-cloudflare-worker",
+    "cloudflare-worker-mock": "file:./packages/cloudflare-worker-mock",
+    "types-cloudflare-worker": "file:./packages/types-cloudflare-worker",
     "@udacity/types-service-worker-mock": "file:./packages/@udacity/types-service-worker-mock",
     "jest": "^24.8.0",
     "jest-fetch-mock": "^2.1.2",

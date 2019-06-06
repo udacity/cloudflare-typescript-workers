@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 // The class is separate file simply to show imports working
-import { CloudflareWorkerKV } from '@udacity/types-cloudflare-worker';
+import { CloudflareWorkerKV } from 'types-cloudflare-worker';
 
 // Declare a Named KV in the global scope. ref:
 // https://developers.cloudflare.com/workers/kv/api/

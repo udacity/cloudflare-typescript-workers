@@ -44,12 +44,12 @@ limitations under the License.
 import {
   CloudflareWorkerGlobalScope,
   CloudflareWorkerKVOptions,
-} from '@udacity/types-cloudflare-worker';
+} from 'types-cloudflare-worker';
 declare var self: CloudflareWorkerGlobalScope;
 
 import makeCloudflareWorkerEnv, {
   makeCloudflareWorkerKVEnv,
-} from '@udacity/cloudflare-worker-mock';
+} from 'cloudflare-worker-mock';
 
 describe('helloworker', () => {
   beforeEach(() => {
