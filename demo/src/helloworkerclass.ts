@@ -15,6 +15,18 @@ limitations under the License.
 */
 
 // The class is separate file simply to show imports working
+import { CloudflareWorkerKV } from 'types-cloudflare-worker';
+
+// Declare a Named KV in the global scope. ref:
+// https://developers.cloudflare.com/workers/kv/api/
+
+// The name the KV is used to help you identify the namespace and must be unique
+// within your account for this demo, we use countryCodeKV to represent the KV
+// to store country code info.
+declare global {
+  const countryCodeKV: CloudflareWorkerKV;
+}
+
 export class HelloWorkerClass {
   private responseInit = {
     headers: { 'Content-Type': 'application/json' },
@@ -40,12 +52,13 @@ export class HelloWorkerClass {
 
       if (originResponse.status === 200) {
         event.waitUntil(cache.put(request, originResponse));
-
         body = await originResponse.text();
       }
+      countryCodeKV.put(request.cf.country, '!', { expiration: 100 });
+      const countryCode = await countryCodeKV.get(request.cf.country);
 
       response = new Response(
-        `${body} ${request.cf.country}!`,
+        `${body} ${request.cf.country} ${countryCode}!`,
         this.responseInit,
       );
     }

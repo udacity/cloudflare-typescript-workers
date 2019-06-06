@@ -1,6 +1,6 @@
 {
   "name": "cloudflare-worker-mock",
-  "version": "1.0.0-rc8",
+  "version": "1.0.0",
   "description": "Mocks for the Cloudflare Worker API",
   "main": "index.js",
   "scripts": {
@@ -35,6 +35,6 @@
     "@udacity/types-service-worker-mock": "^1.0.0-rc8"
   },
   "dependencies": {
-    "service-worker-mock": "^2.0.0"
+    "service-worker-mock": "^2.0.3"
   }
 }

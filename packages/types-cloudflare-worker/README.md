@@ -1,10 +1,9 @@
 # TypeScript types for Cloudflare Workers
 
-Types for [Cloudflare Workers][cfworkers] extending Service Worker types.
-Follows documentation available in:
+Types for [Cloudflare
+Workers](https://www.cloudflare.com/products/cloudflare-workers/) extending
+Service Worker types. Follows documentation available in:
 https://developers.cloudflare.com/workers/about/
-
-[cfworkers](https://www.cloudflare.com/products/cloudflare-workers/)
 
 ## Use
 
