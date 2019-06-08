@@ -19,8 +19,7 @@ declare var self: CloudflareWorkerGlobalScope;
 
 import HelloWorkerClass from './helloworkerclass';
 
-self.addEventListener('fetch', (event: Event) => {
+self.addEventListener('fetch', (event: FetchEvent) => {
   const worker = new HelloWorkerClass();
-  const fetchEvent = event as FetchEvent;
-  fetchEvent.respondWith(worker.handle(fetchEvent));
+  event.respondWith(worker.handle(event));
 });
