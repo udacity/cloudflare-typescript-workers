@@ -2,34 +2,37 @@
 
 [![CircleCI](https://circleci.com/gh/udacity/cloudflare-typescript-workers.svg?style=svg)](https://circleci.com/gh/udacity/cloudflare-typescript-workers)
 
-[Cloudflare Workers][about-workers] allow you to run JavaScript around the world
-on on Cloudflare's edge servers. The [Cloudflare Worker API implements a
-subset][worker-api-reference] of the [Service Worker API][service-worker-api]
-specification, therefore Service Worker TypeScript types are usable.
+[Cloudflare Workers][about-workers] allow you to run JavaScript on Cloudflare's
+edge servers around the world. You can modify your site’s HTTP requests and
+responses, make parallel requests, or generate responses from the edge. This
+project develops, tests, and deploys NPM packages supporting the development of
+Cloudflare Workers using TypeScript.
 
-[about-workers]:https://developers.cloudflare.com/workers/about/
-[worker-api-reference]:https://developers.cloudflare.com/workers/reference/
-[service-worker-api]:https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
+[Get started on your own TypeScript Cloudflare Worker using the
+Template.][starter-template]
 
-## Packages
-
-This project exists to develop, test and deploy three NPM packages supporting
-the development of Cloudflare Workers using TypeScript:
-
-* [`@udacity/types-service-worker-mock`][types-service-worker-mock] - Incomplete
-  types for the `pinterest/service-worker-mock` to support Cloudflare Worker
-  Testing. This may be pushed to the NPM `@types` project in the future, but
-  needs additional work before that is reasonable.
 * [`types-cloudflare-worker`][types-cloudflare-worker] - Complete types for all
   public features provided by Cloudflare Workers. Supports the `Request.cf`
   object, the Cache API and KV API.
 * [`cloudflare-worker-mock`][cloudflare-worker-mock] - Wraps
   `service-worker-mock` for name consistency, developer experience and to
   provide a simple mockable Cache API and KV API implementation.
+* [`@udacity/types-service-worker-mock`][types-service-worker-mock] - Incomplete
+  types for the `pinterest/service-worker-mock` to support Cloudflare Worker
+  Testing. May be pushed to the NPM `@types` project in the future, but needs
+  additional work before that is reasonable.
 
+The [Cloudflare Worker API implements a subset][worker-api-reference] of the
+[Service Worker API][service-worker-api] specification, therefore Service Worker
+TypeScript types are a useful starting point.
+
+[about-workers]:https://developers.cloudflare.com/workers/about/
+[starter-template]:https://github.com/udacity/cloudflare-typescript-worker-template
 [types-service-worker-mock]:https://www.npmjs.com/package/@udacity/types-service-worker-mock
 [types-cloudflare-worker]:https://www.npmjs.com/package/types-cloudflare-worker
 [cloudflare-worker-mock]:https://www.npmjs.com/package/cloudflare-worker-mock
+[worker-api-reference]:https://developers.cloudflare.com/workers/reference/
+[service-worker-api]:https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
 
 ## Example
 
@@ -53,10 +56,9 @@ export class Worker {
   }
 }
 
-self.addEventListener('fetch', (event: Event) => {
+self.addEventListener('fetch', (event: FetchEvent) => {
   const worker = new Worker();
-  const fetchEvent = event as FetchEvent;
-  fetchEvent.respondWith(worker.handle(fetchEvent));
+  event.respondWith(worker.handle(event));
 });
 ```
 
@@ -64,8 +66,6 @@ self.addEventListener('fetch', (event: Event) => {
 
 Start with the [Starter Template][starter-template] or run the following
 commands:
-
-[starter-template]:https://github.com/udacity/cloudflare-typescript-worker-template
 
 ```bash
 npm init
