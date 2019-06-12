@@ -28,5 +28,8 @@
     "global.js",
     "global.d.ts",
     "LICENSE"
-  ]
+  ],
+  "devDependencies": {
+    "@types/node": "^12.6.4"
+  }
 }
