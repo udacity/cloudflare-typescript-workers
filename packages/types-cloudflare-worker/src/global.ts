@@ -57,6 +57,20 @@ declare global {
     input: RequestInfo,
     init?: CloudflareRequestInit,
   ): Promise<Response>;
+
+  // Overload Headers interface to manually add entries()
+  // https://github.com/udacity/cloudflare-typescript-workers/issues/4
+  interface Headers {
+    /**
+     * The Headers.entries() method returns an iterator allowing to go through
+     * all key/value pairs contained in this object. The both the key and value
+     * of each pairs are ByteString objects.
+     *
+     * Note: This override will exist until
+     * https://github.com/microsoft/TSJS-lib-generator/issues/729 is fixed.
+     */
+    entries(): IterableIterator<[string, string]>;
+  }
 }
 
 /**
