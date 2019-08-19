@@ -30,11 +30,11 @@
   },
   "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme",
   "devDependencies": {
-    "@types/jest": "^24.0.15",
-    "@types/node": "^12.6.4",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.2",
     "@udacity/types-service-worker-mock": "file:./packages/@udacity/types-service-worker-mock",
     "cloudflare-worker-mock": "file:./packages/cloudflare-worker-mock",
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "jest-fetch-mock": "^2.1.2",
     "prettier": "^1.18.2",
     "service-worker-mock": "^2.0.3",
@@ -46,8 +46,8 @@
     "tslint-plugin-prettier": "^2.0.1",
     "types-cloudflare-worker": "file:./packages/types-cloudflare-worker",
     "typescript": "^3.5.3",
-    "webpack": "^4.35.3",
-    "webpack-cli": "^3.3.6"
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
   },
   "dependencies": {}
 }
