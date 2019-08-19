@@ -225,7 +225,7 @@ export interface CloudflareRequestAttributes extends CloudflareRequestFeatures {
    */
   readonly tlsVersion?: string;
 
-  // Business and Enterprise scripts have access to:
+  // Business and Enterprise only:
 
   /**
    * The browser-requested prioritization information in the request object.
@@ -307,13 +307,27 @@ export interface CloudflareRequestAttributes extends CloudflareRequestFeatures {
 // https://developers.cloudflare.com/workers/reference/cloudflare-features/
 export interface CloudflareRequestFeatures {
   /**
+   * This option forces Cloudflare to cache the response for this request,
+   * regardless of what headers are seen on the response. This is equivalent to
+   * setting the page rule “Cache Level” (to “Cache Everything”). (e.g. true)
+   */
+  cacheEverything?: boolean;
+
+  /**
+   * Disables ScrapeShield for this request. When you specify this option, the
+   * value should always be false.
+   */
+  scrapeShield?: boolean;
+
+  /**
    * Sets Polish mode. The possible values are "lossy", "lossless", or "off".
    */
   polish?: string;
 
   /**
    * Enables or disables AutoMinify for various file types. The value is an
-   * object containing boolean fields for javascript, css, and html.
+   * object containing Boolean fields for javascript, css, and html. (e.g. {
+   * javascript: true, css: true, html: false })
    */
   minify?: {
     javascript?: boolean;
@@ -328,47 +342,23 @@ export interface CloudflareRequestFeatures {
   mirage?: boolean;
 
   /**
-   * Disables ScrapeShield for this request. When you specify this option, the
-   * value should always be false.
-   */
-  scrapeShield?: boolean;
-
-  /**
    * Disables Cloudflare Apps for this request. When you specify this option,
    * the value should always be false.
    */
   apps?: boolean;
 
   /**
-   *
-   * Redirects the request to an alternate origin server. You can use this, for
-   * example, to implement load balancing across several origins.
-   *
-   * You can achieve a similar effect by simply changing the request URL. For
-   * example:
-   *
-   * let url = new URL(event.request.url)
-   * url.hostname = 'us-east.example.com'
-   * fetch(url, event.request)
-   *
-   * However, there is an important difference: If you use resolveOverride to
-   * change the origin, then the request will be sent with a Host header
-   * matching the original URL. Often, your origin servers will all expect the
-   * Host header to specify your web site’s main hostname, not the hostname of
-   * the specific replica. This is where resolveOverride is needed.
-   *
-   * For security reasons, resolveOverride is only honored when both the URL
-   * hostname and the resolveOverride hostname are orange-cloud hosts within
-   * your own zone. Otherwise, the setting is ignored. Note that CNAME hosts are
-   * allowed. So, if you want to resolve to a hostname that is under a different
-   * domain, first declare a CNAME record within your own zone’s DNS mapping to
-   * the external hostname, then set resolveOverride to point to that CNAME
-   * record.
+   * This option forces Cloudflare to cache the response for this request,
+   * regardless of what headers are seen on the response. This is equivalent to
+   * setting two page rules: "Edge Cache TTL" and "Cache Level" (to "Cache
+   * Everything").
    */
-  resolveOverride?: string;
+  cacheTtl?: number;
+
+  // Enterprise only:
 
   /**
-   * Set cache key for this request.
+   * Set cache key for this request. Enterprise only.
    *
    * A request’s cache key is what determines if two requests are "the same" for
    * caching purposes. If a request has the same cache key as some previous
@@ -414,14 +404,6 @@ export interface CloudflareRequestFeatures {
   cacheKey?: string;
 
   /**
-   * This option forces Cloudflare to cache the response for this request,
-   * regardless of what headers are seen on the response. This is equivalent to
-   * setting two page rules: "Edge Cache TTL" and "Cache Level" (to "Cache
-   * Everything").
-   */
-  cacheTtl?: number;
-
-  /**
    * This option is a version of the cacheTtl feature which chooses a TTL based
    * on the response’s status code. If the response to this request has a status
    * code that matches, Cloudflare will cache for the instructed time, and
@@ -449,15 +431,31 @@ export interface CloudflareRequestFeatures {
   cacheTtlByStatus?: { [key: string]: number };
 
   /**
-   * Setting the cache level to Cache Everything will override the default
-   * “cacheability” of the asset. For TTL, Cloudflare will still rely on headers
-   * set by the origin.
+   * Redirects the request to an alternate origin server. You can use this, for
+   * example, to implement load balancing across several origins. Enterprise
+   * only.
    *
-   * Note: This feature is only listed on
-   * https://developers.cloudflare.com/workers/recipes/vcl-conversion/controlling-the-cache/
-   * and not the primary API documentation page.
+   * You can achieve a similar effect by simply changing the request URL. For
+   * example:
+   *
+   * let url = new URL(event.request.url) url.hostname = 'us-east.example.com'
+   * fetch(url, event.request)
+   *
+   * However, there is an important difference: If you use resolveOverride to
+   * change the origin, then the request will be sent with a Host header
+   * matching the original URL. Often, your origin servers will all expect the
+   * Host header to specify your web site’s main hostname, not the hostname of
+   * the specific replica. This is where resolveOverride is needed.
+   *
+   * For security reasons, resolveOverride is only honored when both the URL
+   * hostname and the resolveOverride hostname are orange-cloud hosts within
+   * your own zone. Otherwise, the setting is ignored. Note that CNAME hosts are
+   * allowed. So, if you want to resolve to a hostname that is under a different
+   * domain, first declare a CNAME record within your own zone’s DNS mapping to
+   * the external hostname, then set resolveOverride to point to that CNAME
+   * record.
    */
-  cacheEverything?: boolean;
+  resolveOverride?: string;
 }
 
 export interface CloudflareRequestInit extends RequestInit {
