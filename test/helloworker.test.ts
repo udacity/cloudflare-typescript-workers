@@ -105,8 +105,6 @@ describe('helloworker', () => {
     request.cf = {
       colo: 'SFO',
       country: 'US',
-      tlsCipher: 'AES GCM',
-      tlsVersion: '1.3',
     };
     const response = await self.trigger('fetch', request);
 

@@ -163,25 +163,144 @@ export interface CloudflareWorkerGlobalKVPatch {
  */
 export interface CloudflareRequestAttributes extends CloudflareRequestFeatures {
   /**
-   * The TLS version used on the connection to Cloudflare.
+   * ASN of the incoming request. (e.g. 395747)
    */
-  readonly tlsVersion: string;
+  readonly asn?: string;
 
   /**
-   * The cipher used on the connection to Cloudflare.
+   * The three letter airport code of the colo the request hit.
    */
-  readonly tlsCipher: string;
+  readonly colo?: string;
+
+  /**
+   * The browser-requested weight for the HTTP/2 prioritization.
+   */
+  readonly weight?: string;
+
+  /**
+   * The browser-requested HTTP/2 exclusive flag (1 for Chromium-based browsers,
+   * 0 for others).
+   */
+  readonly exclusive?: '0' | '1';
+
+  /**
+   * HTTP/2 stream ID for the request group (only non-zero for Firefox).
+   */
+  readonly group?: string;
+
+  /**
+   * HTTP/2 weight for the request group (only non-zero for Firefox).
+   */
+  readonly 'group-weight'?: string;
+
+  /**
+   * The cipher for the connection to Cloudflare. (e.g. "AEAD-AES128-GCM-SHA256")
+   */
+  readonly tlsCipher?: string;
 
   /**
    * The two letter country code on the request (this is the same value as
    * the one provided by the CF-IPCountry header.)
    */
-  readonly country: string;
+  readonly country?: string;
 
   /**
-   * The three letter airport code of the colo the request hit.
+   * Only set when using Cloudflare Access.
    */
-  readonly colo: string;
+  readonly tlsClientAuth?: {
+    certIssuerDNLegacy: string;
+    certIssuerDN: string;
+    certPresented: '0' | '1';
+    certSubjectDNLegacy: string;
+    certSubjectDN: string;
+    certNotBefore: string; // Format "Dec 22 19:39:00 2018 GMT"
+    certNotAfter: string; // Format "Dec 22 19:39:00 2018 GMT"
+    certSerial: string;
+    certFingerprintSHA1: string;
+    certVerified: string; // "SUCCESS", "FAILED:reason", "NONE"
+  };
+
+  /**
+   * The TLS version of the connection to Cloudflare (e.g. TLSv1.3)
+   */
+  readonly tlsVersion?: string;
+
+  // Business and Enterprise scripts have access to:
+
+  /**
+   * The browser-requested prioritization information in the request object.
+   * (e.g. “weight=192;exclusive=0;group=3;group-weight=127”)
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly requestPriority?: string;
+
+  /**
+   * City of the incoming request. (e.g. "Austin")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly city?: string;
+
+  /**
+   * Continent of the incoming request. (e.g. "NA")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly continent?: string;
+
+  /**
+   * HTTP Protocol (e.g. "HTTP/2")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly httpProtocol?: string;
+
+  /**
+   * Latitude of the incoming request. (e.g. "30.27130")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly latitude?: number;
+
+  /**
+   * Longitude of the incoming request. (e.g. "-97.74260")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly longitude?: number;
+
+  /**
+   * PostalCode of the incoming request. (e.g. "78701")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly postalCode?: string;
+
+  /**
+   * If known, the ISO 3166-2 name for the first level region associated with
+   * the IP address of the incoming request. If not known, this is an empty
+   * string. (e.g. "Texas")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly region?: string;
+
+  /**
+   * If known, the ISO 3166-2 code for the first level region associated with
+   * the IP address of the incoming request. 1 If not known, this is an empty
+   * string. (e.g. "TX")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly regionCode?: string;
+
+  /**
+   * Timezone of the incoming request. (e.g. "America/Chicago")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly timezone?: string;
 }
 
 // An interface for controlling Cloudflare Features on Requests. Reference:
