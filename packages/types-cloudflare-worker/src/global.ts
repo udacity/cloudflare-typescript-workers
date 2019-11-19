@@ -471,7 +471,7 @@ export interface CloudflareWorkerKV {
    *    cursor: "6Ck1la0VxJ0djhidm1MdX2FyD"
    *  }
    */
-  list(prefix?: string, limit?: number, cursor?: string): Promise<{keys: [{name: string, expiration: number}], list_complete: boolean, cursor: string}>;
+  list(prefix?: string, limit?: number, cursor?: string): Promise<{keys: {name: string, expiration?: number}[], list_complete: boolean, cursor: string}>;
 }
 
 /**
