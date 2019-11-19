@@ -26,6 +26,19 @@ declare global {
     cf: CloudflareRequestAttributes; // extends, therefore includes CloudflareRequestFeatures
   }
 
+  // Global augmentation of FetchEvent to provide additional lifecycle APIs.
+  // https://developers.cloudflare.com/workers/about/tips/fetch-event-lifecycle
+  interface FetchEvent {
+    /**
+     * Causes the script to “fail open” (meaning the execution of code is not halted)
+     * on unhandled exceptions. Instead of returning a runtime error response, the runtime
+     * proxies the request to its destination. To prevent JavaScript errors from causing
+     * entire requests to fail on uncaught exceptions, passThroughOnException() causes the
+     * Workers runtime to yield control to the origin server.
+     */
+    passThroughOnException(): void; // extends FetchEvent
+  }
+
   /**
    * Cloudflare Cache Storage
    *

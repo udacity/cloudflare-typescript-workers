@@ -34,6 +34,9 @@ export class HelloWorkerClass {
   };
 
   public async handle(event: FetchEvent) {
+    if (typeof event.passThroughOnException === 'function') {
+      event.passThroughOnException();
+    }
     const cache = caches.default;
     const request = event.request;
 
