@@ -57,7 +57,7 @@ export class HelloWorkerClass {
         event.waitUntil(cache.put(request, originResponse));
         body = await originResponse.text();
       }
-      const country = request.cf.country || '';
+      const country = request.cf.country;
       countryCodeKV.put(country, '!', { expiration: 100 });
       const countryCode = await countryCodeKV.get(country);
 

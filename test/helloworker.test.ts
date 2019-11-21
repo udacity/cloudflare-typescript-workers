@@ -49,6 +49,7 @@ declare var self: CloudflareWorkerGlobalScope;
 
 import makeCloudflareWorkerEnv, {
   makeCloudflareWorkerKVEnv,
+  makeCloudflareWorkerRequest,
 } from 'cloudflare-worker-mock';
 
 describe('helloworker', () => {
@@ -101,11 +102,15 @@ describe('helloworker', () => {
       return Promise.resolve('+1');
     };
 
-    const request = new Request('/path');
-    request.cf = {
-      colo: 'SFO',
-      country: 'US',
-    };
+    const request = makeCloudflareWorkerRequest('/path', {
+      cf: {
+        colo: 'SFO',
+        country: 'US',
+        tlsClientAuth: {
+          certIssuerDN: 'Example',
+        },
+      },
+    });
     const response = await self.trigger('fetch', request);
 
     expect(fetchMock).toBeCalledTimes(1);
