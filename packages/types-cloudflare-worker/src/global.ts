@@ -163,12 +163,38 @@ export interface CloudflareWorkerGlobalKVPatch {
  */
 export interface CloudflareRequestAttributes extends CloudflareRequestFeatures {
   /**
-   * The TLS version used on the connection to Cloudflare.
+   * ASN of the incoming request. (e.g. 395747)
    */
-  readonly tlsVersion: string;
+  readonly asn: string;
 
   /**
-   * The cipher used on the connection to Cloudflare.
+   * The three letter airport code of the colo the request hit.
+   */
+  readonly colo: string;
+
+  /**
+   * The browser-requested weight for the HTTP/2 prioritization.
+   */
+  readonly weight: string;
+
+  /**
+   * The browser-requested HTTP/2 exclusive flag (1 for Chromium-based browsers,
+   * 0 for others).
+   */
+  readonly exclusive: '0' | '1';
+
+  /**
+   * HTTP/2 stream ID for the request group (only non-zero for Firefox).
+   */
+  readonly group: string;
+
+  /**
+   * HTTP/2 weight for the request group (only non-zero for Firefox).
+   */
+  readonly 'group-weight': string;
+
+  /**
+   * The cipher for the connection to Cloudflare. (e.g. "AEAD-AES128-GCM-SHA256")
    */
   readonly tlsCipher: string;
 
@@ -179,14 +205,121 @@ export interface CloudflareRequestAttributes extends CloudflareRequestFeatures {
   readonly country: string;
 
   /**
-   * The three letter airport code of the colo the request hit.
+   * Only set when using Cloudflare Access.
    */
-  readonly colo: string;
+  readonly tlsClientAuth: {
+    certIssuerDNLegacy: string;
+    certIssuerDN: string;
+    certIssuerDNRFC2253: string;
+    certPresented: '0' | '1';
+    certSubjectDNLegacy: string;
+    certSubjectDN: string;
+    certNotBefore: string; // Format "Dec 22 19:39:00 2018 GMT"
+    certNotAfter: string; // Format "Dec 22 19:39:00 2018 GMT"
+    certSerial: string;
+    certFingerprintSHA1: string;
+    certVerified: string; // "SUCCESS", "FAILED:reason", "NONE"
+  };
+
+  /**
+   * The TLS version of the connection to Cloudflare (e.g. TLSv1.3)
+   */
+  readonly tlsVersion: string;
+
+  // Business and Enterprise only:
+
+  /**
+   * The browser-requested prioritization information in the request object.
+   * (e.g. “weight=192;exclusive=0;group=3;group-weight=127”)
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly requestPriority: string;
+
+  /**
+   * City of the incoming request. (e.g. "Austin")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly city: string;
+
+  /**
+   * Continent of the incoming request. (e.g. "NA")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly continent: string;
+
+  /**
+   * HTTP Protocol (e.g. "HTTP/2")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly httpProtocol: string;
+
+  /**
+   * Latitude of the incoming request. (e.g. "30.27130")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly latitude: number;
+
+  /**
+   * Longitude of the incoming request. (e.g. "-97.74260")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly longitude: number;
+
+  /**
+   * PostalCode of the incoming request. (e.g. "78701")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly postalCode: string;
+
+  /**
+   * If known, the ISO 3166-2 name for the first level region associated with
+   * the IP address of the incoming request. If not known, this is an empty
+   * string. (e.g. "Texas")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly region: string;
+
+  /**
+   * If known, the ISO 3166-2 code for the first level region associated with
+   * the IP address of the incoming request. 1 If not known, this is an empty
+   * string. (e.g. "TX")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly regionCode: string;
+
+  /**
+   * Timezone of the incoming request. (e.g. "America/Chicago")
+   *
+   * Business and Enterprise ONLY.
+   */
+  readonly timezone: string;
 }
 
 // An interface for controlling Cloudflare Features on Requests. Reference:
 // https://developers.cloudflare.com/workers/reference/cloudflare-features/
 export interface CloudflareRequestFeatures {
+  /**
+   * This option forces Cloudflare to cache the response for this request,
+   * regardless of what headers are seen on the response. This is equivalent to
+   * setting the page rule “Cache Level” (to “Cache Everything”). (e.g. true)
+   */
+  cacheEverything?: boolean;
+
+  /**
+   * Disables ScrapeShield for this request. When you specify this option, the
+   * value should always be false.
+   */
+  scrapeShield?: boolean;
+
   /**
    * Sets Polish mode. The possible values are "lossy", "lossless", or "off".
    */
@@ -194,7 +327,8 @@ export interface CloudflareRequestFeatures {
 
   /**
    * Enables or disables AutoMinify for various file types. The value is an
-   * object containing boolean fields for javascript, css, and html.
+   * object containing Boolean fields for javascript, css, and html. (e.g. {
+   * javascript: true, css: true, html: false })
    */
   minify?: {
     javascript?: boolean;
@@ -209,47 +343,23 @@ export interface CloudflareRequestFeatures {
   mirage?: boolean;
 
   /**
-   * Disables ScrapeShield for this request. When you specify this option, the
-   * value should always be false.
-   */
-  scrapeShield?: boolean;
-
-  /**
    * Disables Cloudflare Apps for this request. When you specify this option,
    * the value should always be false.
    */
   apps?: boolean;
 
   /**
-   *
-   * Redirects the request to an alternate origin server. You can use this, for
-   * example, to implement load balancing across several origins.
-   *
-   * You can achieve a similar effect by simply changing the request URL. For
-   * example:
-   *
-   * let url = new URL(event.request.url)
-   * url.hostname = 'us-east.example.com'
-   * fetch(url, event.request)
-   *
-   * However, there is an important difference: If you use resolveOverride to
-   * change the origin, then the request will be sent with a Host header
-   * matching the original URL. Often, your origin servers will all expect the
-   * Host header to specify your web site’s main hostname, not the hostname of
-   * the specific replica. This is where resolveOverride is needed.
-   *
-   * For security reasons, resolveOverride is only honored when both the URL
-   * hostname and the resolveOverride hostname are orange-cloud hosts within
-   * your own zone. Otherwise, the setting is ignored. Note that CNAME hosts are
-   * allowed. So, if you want to resolve to a hostname that is under a different
-   * domain, first declare a CNAME record within your own zone’s DNS mapping to
-   * the external hostname, then set resolveOverride to point to that CNAME
-   * record.
+   * This option forces Cloudflare to cache the response for this request,
+   * regardless of what headers are seen on the response. This is equivalent to
+   * setting two page rules: "Edge Cache TTL" and "Cache Level" (to "Cache
+   * Everything").
    */
-  resolveOverride?: string;
+  cacheTtl?: number;
+
+  // Enterprise only:
 
   /**
-   * Set cache key for this request.
+   * Set cache key for this request. Enterprise only.
    *
    * A request’s cache key is what determines if two requests are "the same" for
    * caching purposes. If a request has the same cache key as some previous
@@ -295,14 +405,6 @@ export interface CloudflareRequestFeatures {
   cacheKey?: string;
 
   /**
-   * This option forces Cloudflare to cache the response for this request,
-   * regardless of what headers are seen on the response. This is equivalent to
-   * setting two page rules: "Edge Cache TTL" and "Cache Level" (to "Cache
-   * Everything").
-   */
-  cacheTtl?: number;
-
-  /**
    * This option is a version of the cacheTtl feature which chooses a TTL based
    * on the response’s status code. If the response to this request has a status
    * code that matches, Cloudflare will cache for the instructed time, and
@@ -330,15 +432,31 @@ export interface CloudflareRequestFeatures {
   cacheTtlByStatus?: { [key: string]: number };
 
   /**
-   * Setting the cache level to Cache Everything will override the default
-   * “cacheability” of the asset. For TTL, Cloudflare will still rely on headers
-   * set by the origin.
+   * Redirects the request to an alternate origin server. You can use this, for
+   * example, to implement load balancing across several origins. Enterprise
+   * only.
    *
-   * Note: This feature is only listed on
-   * https://developers.cloudflare.com/workers/recipes/vcl-conversion/controlling-the-cache/
-   * and not the primary API documentation page.
+   * You can achieve a similar effect by simply changing the request URL. For
+   * example:
+   *
+   * let url = new URL(event.request.url) url.hostname = 'us-east.example.com'
+   * fetch(url, event.request)
+   *
+   * However, there is an important difference: If you use resolveOverride to
+   * change the origin, then the request will be sent with a Host header
+   * matching the original URL. Often, your origin servers will all expect the
+   * Host header to specify your web site’s main hostname, not the hostname of
+   * the specific replica. This is where resolveOverride is needed.
+   *
+   * For security reasons, resolveOverride is only honored when both the URL
+   * hostname and the resolveOverride hostname are orange-cloud hosts within
+   * your own zone. Otherwise, the setting is ignored. Note that CNAME hosts are
+   * allowed. So, if you want to resolve to a hostname that is under a different
+   * domain, first declare a CNAME record within your own zone’s DNS mapping to
+   * the external hostname, then set resolveOverride to point to that CNAME
+   * record.
    */
-  cacheEverything?: boolean;
+  resolveOverride?: string;
 }
 
 export interface CloudflareRequestInit extends RequestInit {
@@ -367,6 +485,20 @@ export interface CloudflareRequestInit extends RequestInit {
    * preview.
    */
   cf: CloudflareRequestFeatures; // Features, not Attributes, because Attributes are readonly.
+}
+
+// Conditional Types in 2.8, we can now declare a recursive partial type as follows
+// src: https://stackoverflow.com/a/51365037
+type RecursivePartial<T> = {
+  [P in keyof T]?: T[P] extends Array<infer U>
+    ? Array<RecursivePartial<U>>
+    : T[P] extends object
+    ? RecursivePartial<T[P]>
+    : T[P];
+};
+
+export interface MockCloudflareRequestInit extends RequestInit {
+  cf: RecursivePartial<CloudflareRequestAttributes>; // Attributes can only be set in a mock.
 }
 
 /**

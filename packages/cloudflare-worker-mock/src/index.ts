@@ -26,9 +26,11 @@ import makeServiceWorkerEnv from 'service-worker-mock';
 import { EnvOptions } from 'service-worker-mock';
 import {
   CloudflareCacheQueryOptions,
+  CloudflareRequestAttributes,
   CloudflareWorkerGlobalKVPatch,
   CloudflareWorkerGlobalScopePatch,
   CloudflareWorkerKV,
+  MockCloudflareRequestInit,
 } from 'types-cloudflare-worker';
 
 /**
@@ -97,6 +99,67 @@ export function makeCloudflareWorkerKVEnv(
     [name]: cloudflareWorkerKV,
   };
   return cloudflareWorkerKVEnv;
+}
+
+/**
+ * Create a mock Request for a Cloudflare Worker
+ *
+ * A CloudflareRequestAttributes object can be created manually, but it requires
+ * the developer to specify every field. This helper function allows the
+ * developer to specify only fields required by tests.
+ */
+export function makeCloudflareWorkerRequest(
+  input: RequestInfo,
+  init?: MockCloudflareRequestInit,
+): Request {
+  if (init == null) {
+    return new Request(input);
+  }
+
+  const attr = init.cf;
+  const tlsAttr: Partial<CloudflareRequestAttributes['tlsClientAuth']> =
+    attr.tlsClientAuth || {};
+  const cf: CloudflareRequestAttributes = {
+    asn: attr.asn || '395747',
+    city: attr.city || 'Austin',
+    colo: attr.colo || 'AUS',
+    continent: attr.continent || 'NA',
+    country: attr.country || 'US',
+    exclusive: attr.exclusive || '0',
+    group: attr.exclusive || '0',
+    'group-weight': attr['group-weight'] || '0',
+    httpProtocol: attr.httpProtocol || 'HTTP/2',
+    latitude: attr.latitude || 30.2713,
+    longitude: attr.longitude || -97.7426,
+    postalCode: attr.postalCode || '78701',
+    region: attr.region || 'Texas',
+    regionCode: attr.regionCode || 'TX',
+    requestPriority:
+      attr.requestPriority || 'weight=192;exclusive=0;group=3;group-weight=127',
+    timezone: attr.timezone || 'America/Chicago',
+    tlsCipher: attr.tlsCipher || 'AEAD-AES128-GCM-SHA256',
+    tlsClientAuth: {
+      certFingerprintSHA1: tlsAttr.certFingerprintSHA1 || '',
+      certIssuerDN: tlsAttr.certIssuerDN || '',
+      certIssuerDNLegacy: tlsAttr.certIssuerDNLegacy || '',
+      certIssuerDNRFC2253: tlsAttr.certIssuerDNRFC2253 || '',
+      certNotAfter: tlsAttr.certNotAfter || 'Dec 22 19:39:00 2018 GMT',
+      certNotBefore: tlsAttr.certNotBefore || 'Dec 22 19:39:00 2018 GMT',
+      certPresented: tlsAttr.certPresented || '1',
+      certSerial: tlsAttr.certSerial || '',
+      certSubjectDN: tlsAttr.certSubjectDN || '',
+      certSubjectDNLegacy: tlsAttr.certSubjectDNLegacy || '',
+      certVerified: tlsAttr.certVerified || 'SUCCESS',
+    },
+    tlsVersion: attr.weight || 'TLSv1.3',
+    weight: attr.weight || '0',
+  };
+
+  const request = new Request(input, init);
+  // Manually add CloudflareRequestAttributes since new Request() drops them.
+  request.cf = cf;
+
+  return request;
 }
 
 export default makeCloudflareWorkerEnv;
