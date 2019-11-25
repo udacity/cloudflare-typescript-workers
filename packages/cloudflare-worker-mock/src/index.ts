@@ -30,6 +30,7 @@ import {
   CloudflareWorkerGlobalKVPatch,
   CloudflareWorkerGlobalScopePatch,
   CloudflareWorkerKV,
+  CloudflareWorkerKVList,
   MockCloudflareRequestInit,
 } from 'types-cloudflare-worker';
 
@@ -92,6 +93,17 @@ export function makeCloudflareWorkerKVEnv(
     },
     delete(_key: string): Promise<void> {
       return Promise.resolve(undefined);
+    },
+    list(
+      _prefix: string,
+      _limit: number,
+      _cursor: string,
+    ): Promise<CloudflareWorkerKVList> {
+      return Promise.resolve({
+        cursor: '1234567890',
+        keys: [{ name: 'foo', expiration: 1234 }],
+        list_complete: true,
+      });
     },
   };
 

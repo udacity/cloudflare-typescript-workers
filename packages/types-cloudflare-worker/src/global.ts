@@ -602,6 +602,25 @@ export interface CloudflareWorkerKV {
    * As with all updates, deletes can take up to ten seconds to propagate globally.
    */
   delete(key: string): void;
+
+  /**
+   * Listing Keys
+   *
+   * NAMESPACE.list({prefix?: string, limit?: number, cursor?: string})
+   *
+   * The .list method returns a promise which resolves with a CloudflareWorkerKVList object:
+   *
+   *  {
+   *    keys: [{ name: "foo", expiration: 1234}],
+   *    list_complete: false,
+   *    cursor: "6Ck1la0VxJ0djhidm1MdX2FyD"
+   *  }
+   */
+  list(
+    prefix?: string,
+    limit?: number,
+    cursor?: string,
+  ): Promise<CloudflareWorkerKVList>;
 }
 
 /**
@@ -628,4 +647,16 @@ export interface CloudflareWorkerKVOptions {
    * you would set its expiration TTL to 600.
    */
   expirationTtl?: number;
+}
+
+/**
+ * Cloudflare Worker KV key list
+ */
+export interface CloudflareWorkerKVList {
+  keys: Array<{
+    name: string;
+    expiration?: number;
+  }>;
+  list_complete: boolean;
+  cursor: string;
 }
