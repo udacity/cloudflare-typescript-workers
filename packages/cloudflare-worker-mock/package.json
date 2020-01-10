@@ -35,6 +35,6 @@
     "@udacity/types-service-worker-mock": "^1.0.0-rc8"
   },
   "dependencies": {
-    "service-worker-mock": "^2.0.3"
+    "service-worker-mock": "^2.0.4"
   }
 }
