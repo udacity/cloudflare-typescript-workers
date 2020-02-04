@@ -324,7 +324,23 @@ export interface CloudflareRequestFeatures {
    * Sets Polish mode. The possible values are "lossy", "lossless", or "off".
    */
   polish?: string;
-
+    
+    
+  /**
+   * Image resize options:
+   * https://developers.cloudflare.com/images/worker/
+   */
+  image?: {
+      width?: integer;
+      height?: integer;
+      dpr?: integer;
+      fit?: string;
+      quality?: integer;
+      format?: string;
+      metadata?: string;
+      rotate?: integer;
+  };
+    
   /**
    * Enables or disables AutoMinify for various file types. The value is an
    * object containing Boolean fields for javascript, css, and html. (e.g. {
