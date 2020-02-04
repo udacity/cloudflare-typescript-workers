@@ -324,8 +324,7 @@ export interface CloudflareRequestFeatures {
    * Sets Polish mode. The possible values are "lossy", "lossless", or "off".
    */
   polish?: string;
-    
-    
+
   /**
    * Image resize options:
    * https://developers.cloudflare.com/images/worker/
