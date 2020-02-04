@@ -330,14 +330,14 @@ export interface CloudflareRequestFeatures {
    * https://developers.cloudflare.com/images/worker/
    */
   image?: {
-    width?: integer;
-    height?: integer;
-    dpr?: integer;
+    width?: number;
+    height?: number;
+    dpr?: number;
     fit?: string;
-    quality?: integer;
+    quality?: number;
     format?: string;
     metadata?: string;
-    rotate?: integer;
+    rotate?: number;
   };
 
   /**
