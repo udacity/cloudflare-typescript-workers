@@ -330,16 +330,16 @@ export interface CloudflareRequestFeatures {
    * https://developers.cloudflare.com/images/worker/
    */
   image?: {
-      width?: integer;
-      height?: integer;
-      dpr?: integer;
-      fit?: string;
-      quality?: integer;
-      format?: string;
-      metadata?: string;
-      rotate?: integer;
+    width?: integer;
+    height?: integer;
+    dpr?: integer;
+    fit?: string;
+    quality?: integer;
+    format?: string;
+    metadata?: string;
+    rotate?: integer;
   };
-    
+
   /**
    * Enables or disables AutoMinify for various file types. The value is an
    * object containing Boolean fields for javascript, css, and html. (e.g. {
