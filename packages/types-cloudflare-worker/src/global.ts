@@ -326,6 +326,55 @@ export interface CloudflareRequestFeatures {
   polish?: string;
 
   /**
+   * Resize images fetched from the origin server on the fly. The value is an
+   * object specifying the desired image properties.
+   */
+  image?: {
+    /* Maximum width in pixels. Must be an integer. */
+    width?: number;
+
+    /* Maximum height in pixels. Must be an integer. */
+    height?: number;
+
+    /* Device Pixel Ratio. Default 1. Multiplier for width/height that makes it
+     * easier to specify higher-DPI sizes in <img srcset> */
+    dpr?: number;
+
+    /* Resizing mode. Options are: "scale-down", "contain", "cover", or "pad". */
+    fit?: string;
+
+    /* Gravity when cropping with `fit: "cover"`.  The value is either a string
+     * "left", "right", "top", "bottom" or "center" (the default), or an object
+     * {x, y} containing focal point coordinates in the original image
+     * expressed as fractions ranging from 0.0 (top or left) to 1.0 (bottom or
+     * right), 0.5 being the center. */
+    gravity?: string;
+
+    /* Quality setting from 1-100 (useful values are in 60-90 range). Default 85. */
+    quality?: number;
+
+    /* By default, the image format is retained from the source. Optionally
+     * images can be converted to "webp", or metadata returned as "json".
+     * Other format conversion, e.g. gif to jpeg, is not supported. */
+    format?: string;
+
+    /* What EXIF data should be preserved in the output image. Note that EXIF
+     * rotation and embedded color profiles are always "baked into" the image.
+     * Options are:
+     *   "keep"      - Preserve most EXIF metadata, including GPS location.
+     *   "copyright" - Only keep the copyright tag, discard everything else.
+     *                 This is the default behavior for JPEG files.
+     *   "none"      - Discard all invisible EXIF metadata. Currently WebP and
+     *                 PNG output formats always discard metadata.
+     */
+    metadata?: string;
+
+    /* Number of degrees (90, 180, 270) to rotate the image by. width and
+     * height options refer to axes after rotation. */
+    rotate?: number;
+  };
+
+  /**
    * Enables or disables AutoMinify for various file types. The value is an
    * object containing Boolean fields for javascript, css, and html. (e.g. {
    * javascript: true, css: true, html: false })
