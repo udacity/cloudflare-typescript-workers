@@ -30,6 +30,6 @@
     "LICENSE"
   ],
   "devDependencies": {
-    "@types/node": "^12.12.25"
+    "@types/node": "^12.12.26"
   }
 }
