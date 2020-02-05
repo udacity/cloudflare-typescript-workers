@@ -30,8 +30,8 @@
   },
   "homepage": "https://github.com/udacity/cloudflare-typescript-workers#readme",
   "devDependencies": {
-    "@types/jest": "^24.9.0",
-    "@types/node": "^12.12.25",
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.12.26",
     "@udacity/types-service-worker-mock": "file:./packages/@udacity/types-service-worker-mock",
     "cloudflare-worker-mock": "file:./packages/cloudflare-worker-mock",
     "jest": "^24.9.0",
