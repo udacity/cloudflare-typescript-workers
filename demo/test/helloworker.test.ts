@@ -114,8 +114,8 @@ describe('helloworker', () => {
     const response = await self.trigger('fetch', request);
 
     expect(fetchMock).toBeCalledTimes(1);
-    expect(response[0].status).toBe(200);
-    expect(await response[0].text()).toBe('Hello US +1!');
+    expect(response.status).toBe(200);
+    expect(await response.text()).toBe('Hello US +1!');
     expect(putCacheCalled).toBe(true);
     expect(putKVCalled).toBe(true);
     expect(getKVCalled).toBe(true);
