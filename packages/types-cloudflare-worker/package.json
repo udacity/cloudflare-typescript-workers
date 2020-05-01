@@ -1,6 +1,6 @@
 {
   "name": "types-cloudflare-worker",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "TypeScript types for the Cloudflare Worker API",
   "main": "global.js",
   "scripts": {

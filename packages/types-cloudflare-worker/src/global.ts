@@ -539,8 +539,8 @@ export interface CloudflareRequestInit extends RequestInit {
 // Conditional Types in 2.8, we can now declare a recursive partial type as follows
 // src: https://stackoverflow.com/a/51365037
 type RecursivePartial<T> = {
-  [P in keyof T]?: T[P] extends Array<infer U>
-    ? Array<RecursivePartial<U>>
+  [P in keyof T]?: T[P] extends (infer U)[]
+    ? RecursivePartial<U>[]
     : T[P] extends object
     ? RecursivePartial<T[P]>
     : T[P];
@@ -702,10 +702,10 @@ export interface CloudflareWorkerKVOptions {
  * Cloudflare Worker KV key list
  */
 export interface CloudflareWorkerKVList {
-  keys: Array<{
+  keys: {
     name: string;
     expiration?: number;
-  }>;
+  }[];
   list_complete: boolean;
   cursor: string;
 }
