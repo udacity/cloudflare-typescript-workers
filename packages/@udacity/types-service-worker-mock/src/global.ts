@@ -43,7 +43,7 @@ declare global {
   interface ServiceWorkerGlobalScope {
     listeners: ServiceWorkerListener;
 
-    trigger(name: string, args: Request): Promise<Response[]>;
+    trigger(name: string, args: Request): Promise<Response>;
     // Final overload for void.
     trigger(name: string, args: any): Promise<void>;
   }
