@@ -31,6 +31,6 @@
     "LICENSE"
   ],
   "dependencies": {
-    "service-worker-mock": "^2.0.4"
+    "service-worker-mock": "^2.0.5"
   }
 }
