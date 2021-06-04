@@ -650,7 +650,7 @@ export interface CloudflareWorkerKV {
    *
    * As with all updates, deletes can take up to ten seconds to propagate globally.
    */
-  delete(key: string): void;
+  delete(key: string): Promise<void>;
 
   /**
    * Listing Keys
