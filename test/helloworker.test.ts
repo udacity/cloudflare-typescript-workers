@@ -44,6 +44,7 @@ limitations under the License.
 import {
   CloudflareWorkerGlobalScope,
   CloudflareWorkerKVOptions,
+  CloudflareWorkerKVList,
 } from 'types-cloudflare-worker';
 declare var self: CloudflareWorkerGlobalScope;
 
@@ -82,7 +83,7 @@ describe('helloworker', () => {
       return Promise.resolve(undefined);
     };
 
-    // Setup mock responses for the KV put() and get().
+    // Setup mock responses for the KV put(), get(), and list().
     let putKVCalled = false;
     countryCodeKV.put = (
       _key: string,
@@ -102,6 +103,28 @@ describe('helloworker', () => {
       return Promise.resolve('+1');
     };
 
+    let listKVCalled = false;
+    countryCodeKV.list = (
+      params:
+        | {
+            prefix?: string | undefined;
+            limit?: number | undefined;
+            cursor?: string | undefined;
+          }
+        | undefined,
+    ): Promise<CloudflareWorkerKVList> => {
+      listKVCalled = true;
+      let prefix = 'empty';
+      if (params) {
+        prefix = params.prefix ? params.prefix : 'missing';
+      }
+      return Promise.resolve({
+        keys: [{ name: prefix, expiration: 1234 }],
+        list_complete: false,
+        cursor: 'CursorID',
+      });
+    };
+
     const request = makeCloudflareWorkerRequest('/path', {
       cf: {
         colo: 'SFO',
@@ -115,9 +138,10 @@ describe('helloworker', () => {
 
     expect(fetchMock).toBeCalledTimes(1);
     expect(response.status).toBe(200);
-    expect(await response.text()).toBe('Hello US +1!');
+    expect(await response.text()).toBe('Hello US +1 countries!');
     expect(putCacheCalled).toBe(true);
     expect(putKVCalled).toBe(true);
     expect(getKVCalled).toBe(true);
+    expect(listKVCalled).toBe(true);
   });
 });

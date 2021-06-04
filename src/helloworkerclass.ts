@@ -60,9 +60,10 @@ export class HelloWorkerClass {
       const country = request.cf.country;
       countryCodeKV.put(country, '!', { expiration: 100 });
       const countryCode = await countryCodeKV.get(country);
+      const countryList = await countryCodeKV.list({ prefix: 'countries' });
 
       response = new Response(
-        `${body} ${request.cf.country} ${countryCode}!`,
+        `${body} ${request.cf.country} ${countryCode} ${countryList.keys[0].name}!`,
         this.responseInit,
       );
     }

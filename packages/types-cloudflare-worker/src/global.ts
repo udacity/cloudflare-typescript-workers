@@ -665,11 +665,11 @@ export interface CloudflareWorkerKV {
    *    cursor: "6Ck1la0VxJ0djhidm1MdX2FyD"
    *  }
    */
-  list(
-    prefix?: string,
-    limit?: number,
-    cursor?: string,
-  ): Promise<CloudflareWorkerKVList>;
+  list(params?: {
+    prefix?: string;
+    limit?: number;
+    cursor?: string;
+  }): Promise<CloudflareWorkerKVList>;
 }
 
 /**

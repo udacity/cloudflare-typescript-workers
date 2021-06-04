@@ -96,9 +96,13 @@ export function makeCloudflareWorkerKVEnv(
       return Promise.resolve(undefined);
     },
     list(
-      _prefix: string,
-      _limit: number,
-      _cursor: string,
+      _params:
+        | {
+            prefix?: string | undefined;
+            limit?: number | undefined;
+            cursor?: string | undefined;
+          }
+        | undefined,
     ): Promise<CloudflareWorkerKVList> {
       return Promise.resolve({
         cursor: '1234567890',
