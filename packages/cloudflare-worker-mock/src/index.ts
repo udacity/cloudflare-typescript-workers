@@ -41,7 +41,8 @@ export function makeCloudflareWorkerEnv(
   envOptions?: EnvOptions,
 ): CloudflareWorkerGlobalScopePatch {
   const serviceWorkerEnv = makeServiceWorkerEnv(envOptions);
-  const cloudflareWorkerEnv = serviceWorkerEnv as CloudflareWorkerGlobalScopePatch;
+  const cloudflareWorkerEnv =
+    serviceWorkerEnv as CloudflareWorkerGlobalScopePatch;
 
   cloudflareWorkerEnv.caches = {
     default: {

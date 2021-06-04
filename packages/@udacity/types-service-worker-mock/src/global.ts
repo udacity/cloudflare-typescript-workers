@@ -23,7 +23,7 @@ limitations under the License.
 export {};
 declare global {
   type ServiceWorkerGlobalScopeEventListener = <
-    K extends keyof ServiceWorkerGlobalScopeEventMap
+    K extends keyof ServiceWorkerGlobalScopeEventMap,
   >(
     this: ServiceWorkerGlobalScope,
     ev: K,
