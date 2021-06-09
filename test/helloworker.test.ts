@@ -107,9 +107,9 @@ describe('helloworker', () => {
     countryCodeKV.list = (
       params:
         | {
-            prefix?: string | undefined;
-            limit?: number | undefined;
-            cursor?: string | undefined;
+            prefix?: string;
+            limit?: number;
+            cursor?: string;
           }
         | undefined,
     ): Promise<CloudflareWorkerKVList> => {
