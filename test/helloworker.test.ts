@@ -116,7 +116,7 @@ describe('helloworker', () => {
       listKVCalled = true;
       let prefix = 'empty';
       if (params) {
-        prefix = params.prefix ? params.prefix : 'missing';
+        prefix = params.prefix || 'missing';
       }
       return Promise.resolve({
         keys: [{ name: prefix, expiration: 1234 }],
