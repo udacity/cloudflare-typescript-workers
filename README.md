@@ -1,6 +1,8 @@
 # Cloudflare Workers with TypeScript and Webpack
 
-[![CircleCI](https://circleci.com/gh/udacity/cloudflare-typescript-workers.svg?style=svg)](https://circleci.com/gh/udacity/cloudflare-typescript-workers)
+_**Retired: as of 2022, Cloudflare's official types package
+[`@cloudflare/workers-types`](https://github.com/cloudflare/workers-types)
+is more up-to-date and better supported.**_
 
 [Cloudflare Workers][about-workers] allow you to run JavaScript on Cloudflare's
 edge servers around the world. You can modify your site’s HTTP requests and
